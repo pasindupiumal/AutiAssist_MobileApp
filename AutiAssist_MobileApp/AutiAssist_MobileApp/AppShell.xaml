@@ -101,13 +101,6 @@
             Shell.FlyoutBehavior="Disabled" />
     </FlyoutItem>
 
-    <FlyoutItem FlyoutItemIsVisible="False">
-        <ShellContent
-            ContentTemplate="{DataTemplate local:RegisterPage}"
-            Route="RegisterPage"
-            Shell.FlyoutBehavior="Disabled" />
-    </FlyoutItem>
-
     <FlyoutItem Title="Home" Icon="icon_about.png">
         <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage" />
     </FlyoutItem>

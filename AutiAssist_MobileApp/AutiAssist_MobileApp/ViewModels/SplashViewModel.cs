@@ -16,17 +16,14 @@ namespace AutiAssist_MobileApp.ViewModels
             if (int.Parse(number) == 1)
             {
                 IsBusy = true;
-
-                await Task.Delay(5000);
-
+                await Task.Delay(2000);
                 IsBusy = false;
 
-                //await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                 await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
             }
             else
             {
-                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
             }
 
         }

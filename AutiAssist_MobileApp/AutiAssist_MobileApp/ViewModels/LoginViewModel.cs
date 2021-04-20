@@ -12,8 +12,8 @@ namespace AutiAssist_MobileApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private string email;
-        private string password;
+        private string email = String.Empty;
+        private string password = String.Empty;
         public AsyncCommand LoginCommand { get; }
         public AsyncCommand RegisterCommand { get; }
 
@@ -46,8 +46,16 @@ namespace AutiAssist_MobileApp.ViewModels
             {
                 IsBusy = true;
 
-                await Task.Delay(5000);
-                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+                await Task.Delay(2000);
+
+                if(Email.Equals("Pasindu") && Password.Equals("James"))
+                {
+                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+                }
             }
             catch (Exception ex)
             {
