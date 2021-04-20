@@ -44,18 +44,19 @@ namespace AutiAssist_MobileApp.ViewModels
 
             try
             {
-                IsBusy = true;
+                IsBusy = true;        
+                var AppShellInstance = Xamarin.Forms.Shell.Current as AppShell;
 
-                await Task.Delay(2000);
-
-                if(Email.Equals("Pasindu") && Password.Equals("James"))
-                {
-                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+                if (Email.Equals("Pasindu") && Password.Equals("James"))
+                {                 
+                    AppShellInstance.UpdateFlyoutMenuItems("doctor");
                 }
                 else
                 {
-                    await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+                    AppShellInstance.UpdateFlyoutMenuItems("patient");
                 }
+                await Task.Delay(3000);
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
             catch (Exception ex)
             {
@@ -65,6 +66,7 @@ namespace AutiAssist_MobileApp.ViewModels
             finally
             {
                 IsBusy = false;
+                
             }
         }
 
