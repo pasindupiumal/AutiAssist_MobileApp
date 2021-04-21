@@ -1,24 +1,25 @@
-﻿using MvvmHelpers.Commands;
+﻿using AutiAssist_MobileApp.Services;
+using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        public Command ButtonClick { get; set; }
+        public AsyncCommand ButtonClick { get; set; }
 
         public HomeViewModel()
         {
-            ButtonClick = new Command(ButtonClickAction);
+            ButtonClick = new AsyncCommand(ButtonClickAction);
             
         }
 
-        void ButtonClickAction()
+        private async Task ButtonClickAction()
         {
-            //var AppShellInstance = Xamarin.Forms.Shell.Current as AppShell;
-            //AppShellInstance.UpdateFlyoutMenuItems();
+            await UserService.Login("J", "J");
 
         }
     }

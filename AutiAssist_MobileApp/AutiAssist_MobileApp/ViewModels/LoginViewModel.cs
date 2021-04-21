@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using AutiAssist_MobileApp.Services;
 using AutiAssist_MobileApp.Views;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
@@ -46,6 +47,7 @@ namespace AutiAssist_MobileApp.ViewModels
             {
                 IsBusy = true;        
                 var AppShellInstance = Xamarin.Forms.Shell.Current as AppShell;
+                
 
                 if (Email.Equals("Pasindu") && Password.Equals("James"))
                 {                 
