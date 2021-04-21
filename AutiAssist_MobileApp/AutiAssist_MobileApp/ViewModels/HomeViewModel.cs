@@ -1,4 +1,5 @@
-﻿using AutiAssist_MobileApp.Services;
+﻿using AutiAssist_MobileApp.Models;
+using AutiAssist_MobileApp.Services;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,27 @@ namespace AutiAssist_MobileApp.ViewModels
             
         }
 
+        string response = "Home Page";
+        public string Response
+        {
+            get { return response; }
+            set { SetProperty(ref response, value); }
+        }
+
         private async Task ButtonClickAction()
         {
-            
+            if(IsBusy)
+            {
+                return;
+            }
 
+            IsBusy = true;
+
+            Response response = await UserService.AddNewUser();
+
+            IsBusy = false;
+
+            Response = response.Message;
         }
     }
 }

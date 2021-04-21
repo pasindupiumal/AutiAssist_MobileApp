@@ -93,7 +93,7 @@ namespace AutiAssist_MobileApp.ViewModels
 
         private async Task OnRegisterClicked()
         {
-            await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
         }
     }
 }

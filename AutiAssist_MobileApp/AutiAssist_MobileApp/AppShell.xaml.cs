@@ -10,7 +10,7 @@ namespace AutiAssist_MobileApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            //Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

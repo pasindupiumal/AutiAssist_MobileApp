@@ -9,8 +9,9 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <Label HorizontalOptions="Center" Text="Home Page" />
+            <Label HorizontalOptions="Center" Text="{Binding Response}" />
             <Button Command="{Binding ButtonClick}" Text="Click here" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

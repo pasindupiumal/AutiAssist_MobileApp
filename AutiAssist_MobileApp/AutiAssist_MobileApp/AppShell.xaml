@@ -116,10 +116,25 @@
         <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" Route="ProfilePage" />
     </FlyoutItem>
 
+    <FlyoutItem
+        Title="Register"
+        FlyoutItemIsVisible="True"
+        Icon="icon_about.png">
+        <Tab Title="Register" Icon="icon_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:RegisterPage}" Route="RegisterPage" />
+        </Tab>
+        <Tab Title="Doctor" Icon="icon_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:DoctorPage}" Route="DoctorPage" />
+        </Tab>
+        <Tab Title="Patient" Icon="icon_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:PatientPage}" Route="PatientPage" />
+        </Tab>
+    </FlyoutItem>
 
     <!--  When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem
         Clicked="OnMenuItemClicked"
         StyleClass="MenuItemLayoutStyle"
         Text="Logout" />
+
 </Shell>

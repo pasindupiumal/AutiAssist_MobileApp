@@ -37,8 +37,8 @@ namespace AutiAssist_MobileApp.Services
                 var json = JsonConvert.SerializeObject(credentials);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("Users/login", content);
-                var loginResonse = await response.Content.ReadAsStringAsync();
-                var loginStatus = JsonConvert.DeserializeObject<Response>(loginResonse);
+                var loginResponse = await response.Content.ReadAsStringAsync();
+                var loginStatus = JsonConvert.DeserializeObject<Response>(loginResponse);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -61,6 +61,83 @@ namespace AutiAssist_MobileApp.Services
                 return failedResponse;
             }
         }
+
+        public static async Task<Response> AddNewUser()
+        {
+            var user = new User
+            {
+                Id = "000004",
+                Username = "Chamika",
+                Password = "Password3",
+                UserType = "Doctor",
+                DoctorData = new Doctor
+                {
+                    FirstName = "Chamika",
+                    LastName = "Dimantha",
+                    Email = "chamika@gmail.com",
+                    Specialization = "Eye",
+                    Address = "22B Baker Street",
+                    NIC = "965623562v",
+                    SlmcRegNo = "123456",
+                    PhoneNumber = "07445865269"
+                }
+            };
+
+            var user2 = new User
+            {
+                Id = "000004",
+                Username = "Yasas",
+                Password = "Password4",
+                UserType = "Patient",
+                PatientData = new Patient
+                {
+                    FirstName = "Yasas",
+                    LastName = "Kaushalya",
+                    Email = "yasas@gmail.com",
+                    Age = 25,
+                    Address = "22C Baker Street",
+                    GuardianName = "Pulindu",
+                    AssignedDoctor = "000004",
+                    PhoneNumber = "0779794500"
+                }
+            };
+
+            Response failedResponse = null;
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(user2);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("Users/", content);
+                var addNewUserResponse = await response.Content.ReadAsStringAsync();
+                var AddUserStatus = JsonConvert.DeserializeObject<Response>(addNewUserResponse);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    failedResponse = new Response();
+                    failedResponse.Message = "Error connecting to server";
+                    Debug.WriteLine($"Error connecting to server");
+                    return failedResponse;
+                }
+                else
+                {
+                    return AddUserStatus;
+                }
+            }
+            catch (Exception ex)
+            {
+                failedResponse.Message = "User insertion failed. Exception occured";
+                Debug.WriteLine($"New user insertion error : {ex.Message}");
+                return failedResponse;
+            }
+        }
+
+
+
+
+
+
+
         //public static async Task RemoveCoffee(int id)
         //{
         //    var response = await client.DeleteAsync($"api/Coffee/{id}");
