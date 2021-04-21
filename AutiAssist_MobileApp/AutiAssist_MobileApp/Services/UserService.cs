@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,33 +22,44 @@ namespace AutiAssist_MobileApp.Services
             };
         }
 
-        public static async Task Login(string email, string password)
+        public static async Task<Response> Login(string email, string password)
         {
-            string eemail = "lahiru111";
-            string ppassword = "password1";
-
             var credentials = new Credential
             {
-                Username = eemail,
-                Password = ppassword
+                Username = email,
+                Password = password
             };
 
-            var json = JsonConvert.SerializeObject(credentials);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("Users/login", content);
-            var loginResonse = await response.Content.ReadAsStringAsync();
-            var loginStatus = JsonConvert.DeserializeObject<Response>(loginResonse);
+            Response failedResponse = null;
 
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                await AppShell.Current.DisplayAlert("Error", "Error obtaining user data", "OK");
-            }
-            else
-            {
-                await AppShell.Current.DisplayAlert("Success", loginStatus.Data.ToString(), "OK");
-            }
+                var json = JsonConvert.SerializeObject(credentials);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("Users/login", content);
+                var loginResonse = await response.Content.ReadAsStringAsync();
+                var loginStatus = JsonConvert.DeserializeObject<Response>(loginResonse);
 
-            
+                if (!response.IsSuccessStatusCode)
+                {
+                    failedResponse = new Response();
+                    failedResponse.Data = false;
+                    failedResponse.Message = "Error connecting to server";
+                    Debug.WriteLine($"Error connecting to server");
+                    return failedResponse;
+                }
+                else
+                {
+                    return loginStatus;
+                }
+            }
+            catch (Exception ex)
+            {
+                failedResponse.Data = false;
+                failedResponse.Message = "Validation failed. Exception occured";
+                Debug.WriteLine($"Logging in error : {ex.Message}");
+                return failedResponse;
+            }
         }
         //public static async Task RemoveCoffee(int id)
         //{

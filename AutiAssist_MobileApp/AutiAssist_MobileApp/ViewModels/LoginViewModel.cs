@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using AutiAssist_MobileApp.Models;
 using AutiAssist_MobileApp.Services;
 using AutiAssist_MobileApp.Views;
 using MvvmHelpers;
@@ -45,20 +46,38 @@ namespace AutiAssist_MobileApp.ViewModels
 
             try
             {
-                IsBusy = true;        
+                IsBusy = true;
                 var AppShellInstance = Xamarin.Forms.Shell.Current as AppShell;
-                
 
-                if (Email.Equals("Pasindu") && Password.Equals("James"))
-                {                 
-                    AppShellInstance.UpdateFlyoutMenuItems("doctor");
+                Response response = await UserService.Login(Email, Password);
+
+                if(response == null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", "Credential validation error", "OK");
                 }
                 else
                 {
-                    AppShellInstance.UpdateFlyoutMenuItems("patient");
+                    if (response.Message.Equals("Login Successful"))
+                    {
+                        if (Email.Equals("lahiru111"))
+                        {
+                            AppShellInstance.UpdateFlyoutMenuItems("doctor");
+                        }
+                        else
+                        {
+                            AppShellInstance.UpdateFlyoutMenuItems("patient");
+                        }
+
+                        Email = String.Empty;
+                        Password = String.Empty;
+                        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
+                    }
                 }
-                await Task.Delay(3000);
-                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+
             }
             catch (Exception ex)
             {

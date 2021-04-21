@@ -19,7 +19,7 @@ namespace AutiAssist_MobileApp.ViewModels
 
         private async Task ButtonClickAction()
         {
-            await UserService.Login("J", "J");
+            
 
         }
     }
