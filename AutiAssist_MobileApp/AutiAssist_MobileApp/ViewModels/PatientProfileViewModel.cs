@@ -6,6 +6,9 @@ namespace AutiAssist_MobileApp.ViewModels
 {
     public class PatientProfileViewModel : BaseViewModel
     {
-
+        public PatientProfileViewModel()
+        {
+            Title = "Profile";
+        }
     }
 }

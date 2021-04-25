@@ -14,31 +14,7 @@ namespace AutiAssist_MobileApp.ViewModels
 
         public HomeViewModel()
         {
-            ButtonClick = new AsyncCommand(ButtonClickAction);
-            
-        }
-
-        string response = "Home Page";
-        public string Response
-        {
-            get { return response; }
-            set { SetProperty(ref response, value); }
-        }
-
-        private async Task ButtonClickAction()
-        {
-            if(IsBusy)
-            {
-                return;
-            }
-
-            IsBusy = true;
-
-            //Response response = await UserService.AddNewUser();
-
-            IsBusy = false;
-
-            //Response = response.Message;
+            Title = "Home";   
         }
     }
 }

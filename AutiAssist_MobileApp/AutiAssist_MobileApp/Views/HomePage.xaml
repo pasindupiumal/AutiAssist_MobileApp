@@ -3,15 +3,14 @@
     x:Class="AutiAssist_MobileApp.Views.HomePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels">
+    xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels"
+    Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <Label HorizontalOptions="Center" Text="{Binding Response}" />
-            <Button Command="{Binding ButtonClick}" Text="Click here" />
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+            <Label HorizontalOptions="Center" Text="Home" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -4,11 +4,11 @@ using System.Text;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
-    public class DoctorProfileViewModel : BaseViewModel
+    public class AboutViewModel : BaseViewModel
     {
-        public DoctorProfileViewModel()
+        public AboutViewModel()
         {
-            Title = "Profile";
+            Title = "About";
         }
     }
 }
