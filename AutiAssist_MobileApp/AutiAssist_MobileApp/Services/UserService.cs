@@ -64,44 +64,6 @@ namespace AutiAssist_MobileApp.Services
 
         public static async Task<Response> AddNewUser(User user)
         {
-            var user1 = new User
-            {
-                Id = "000004",
-                Username = "Chamika",
-                Password = "Password3",
-                UserType = "Doctor",
-                DoctorData = new Doctor
-                {
-                    FirstName = "Chamika",
-                    LastName = "Dimantha",
-                    Email = "chamika@gmail.com",
-                    Specialization = "Eye",
-                    Address = "22B Baker Street",
-                    NIC = "965623562v",
-                    SlmcRegNo = "123456",
-                    PhoneNumber = "07445865269"
-                }
-            };
-
-            var user2 = new User
-            {
-                Id = "000004",
-                Username = "Yasas",
-                Password = "Password4",
-                UserType = "Patient",
-                PatientData = new Patient
-                {
-                    FirstName = "Yasas",
-                    LastName = "Kaushalya",
-                    Email = "yasas@gmail.com",
-                    Age = 25,
-                    Address = "22C Baker Street",
-                    GuardianName = "Pulindu",
-                    AssignedDoctor = "000004",
-                    PhoneNumber = "0779794500"
-                }
-            };
-
             Response failedResponse = null;
 
             try

@@ -90,6 +90,7 @@ namespace AutiAssist_MobileApp.ViewModels
                     if (response.Message.Equals("New user added successfully"))
                     {
                         await Application.Current.MainPage.DisplayAlert("Success", "Registration Successful", "OK");
+                        await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                     }
                     else
                     {
@@ -142,7 +143,7 @@ namespace AutiAssist_MobileApp.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Registration error: {ex.Message}");
+                Debug.WriteLine($"Doctor Registration error: {ex.Message}");
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             finally

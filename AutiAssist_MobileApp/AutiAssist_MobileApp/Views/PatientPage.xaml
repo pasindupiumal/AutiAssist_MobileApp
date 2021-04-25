@@ -60,7 +60,7 @@
                     <Label
                         FontSize="{OnPlatform Android=13}"
                         Text="Username"
-                        TextColor="Black" />
+                        TextColor="{Binding UsernameColor}" />
                     <Frame
                         Padding="{OnPlatform Android=8,
                                              iOS=0}"
@@ -88,7 +88,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Password"
-                            TextColor="Black"
+                            TextColor="{Binding PasswordColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -107,19 +107,6 @@
                             Placeholder="******************"
                             Text="{Binding Password, Mode=TwoWay}" />
                     </Frame>
-                    <StackLayout
-                        Margin="0,0,0,5"
-                        Padding="0"
-                        Orientation="Horizontal"
-                        VerticalOptions="Center">
-                        <Label
-                            FontSize="{OnPlatform Android=13}"
-                            IsVisible="{Binding PasswordMatch}"
-                            Text="Passwords do not match"
-                            TextColor="Red"
-                            VerticalOptions="Center"
-                            WidthRequest="150" />
-                    </StackLayout>
                 </StackLayout>
                 <StackLayout
                     Grid.Row="4"
@@ -133,7 +120,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Re-Enter Password"
-                            TextColor="Black"
+                            TextColor="{Binding RePasswordColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -153,7 +140,6 @@
                             Text="{Binding RePassword, Mode=TwoWay}" />
                     </Frame>
                 </StackLayout>
-
                 <StackLayout
                     Grid.Row="5"
                     HorizontalOptions="Center"
@@ -166,7 +152,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="First Name"
-                            TextColor="Black"
+                            TextColor="{Binding FirstNameColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -197,7 +183,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Last Name"
-                            TextColor="Black"
+                            TextColor="{Binding LastNameColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -228,7 +214,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Email"
-                            TextColor="Black"
+                            TextColor="{Binding EmailColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -260,7 +246,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Age"
-                            TextColor="Black"
+                            TextColor="{Binding AgeColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -292,7 +278,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Address"
-                            TextColor="Black"
+                            TextColor="{Binding AddressColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -324,7 +310,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Guardian Name"
-                            TextColor="Black"
+                            TextColor="{Binding GurdianNameColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -356,7 +342,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Assigned Doctor"
-                            TextColor="Black"
+                            TextColor="{Binding AssignedDoctorColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
@@ -370,7 +356,7 @@
                             FontSize="{OnPlatform Android=15,
                                                   iOS=16}"
                             IsEnabled="{Binding IsNotBusy}"
-                            Keyboard="Numeric"
+                            Keyboard="Text"
                             MaxLength="25"
                             Placeholder="001"
                             Text="{Binding AssignedDoctor, Mode=TwoWay}" />
@@ -388,7 +374,7 @@
                         <Label
                             FontSize="{OnPlatform Android=13}"
                             Text="Phone Number"
-                            TextColor="Black"
+                            TextColor="{Binding PhoneNumberColor}"
                             VerticalOptions="Center"
                             WidthRequest="150" />
                     </StackLayout>
