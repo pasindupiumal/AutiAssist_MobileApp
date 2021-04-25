@@ -81,6 +81,14 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <Shell.FlyoutHeader>
+        <local:FlyoutHeader />
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <local:FlyoutFooter />
+    </Shell.FlyoutFooter>
+
     <!--
         When the Flyout is visible this defines the content to display in the flyout.
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element
@@ -95,14 +103,14 @@
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Home" Icon="icon_about.png">
+    <FlyoutItem Title="Home" Icon="home.png">
         <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage" />
     </FlyoutItem>
 
     <FlyoutItem
         x:Name="FlyoutItem_About"
         Title="About"
-        Icon="icon_about.png">
+        Icon="about.png">
         <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
     </FlyoutItem>
 
@@ -110,7 +118,7 @@
         x:Name="FlyoutItem_PatientProfile"
         Title="Profile"
         FlyoutItemIsVisible="False"
-        Icon="icon_about.png">
+        Icon="profile.png">
         <ShellContent ContentTemplate="{DataTemplate local:PatientProfilePage}" Route="PatientProfilePage" />
     </FlyoutItem>
 
@@ -118,7 +126,7 @@
         x:Name="FlyoutItem_DoctorProfile"
         Title="Profile"
         FlyoutItemIsVisible="False"
-        Icon="icon_about.png">
+        Icon="profile.png">
         <ShellContent ContentTemplate="{DataTemplate local:DoctorProfilePage}" Route="DoctorProfilePage" />
     </FlyoutItem>
 
@@ -126,7 +134,7 @@
         x:Name="FlyoutItem_DoctorPatients"
         Title="Patients"
         FlyoutItemIsVisible="False"
-        Icon="icon_about.png">
+        Icon="patients.png">
         <ShellContent ContentTemplate="{DataTemplate local:DoctorPatientsPage}" Route="DoctorPatientsPage" />
     </FlyoutItem>
 
@@ -147,6 +155,7 @@
     <!--  When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem
         Clicked="OnMenuItemClicked"
+        IconImageSource="logout.png"
         StyleClass="MenuItemLayoutStyle"
         Text="Logout" />
 
