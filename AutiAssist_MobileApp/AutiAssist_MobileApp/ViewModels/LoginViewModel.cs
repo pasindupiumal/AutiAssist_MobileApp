@@ -59,7 +59,7 @@ namespace AutiAssist_MobileApp.ViewModels
                 {
                     if (response.Message.Equals("Login Successful"))
                     {
-                        if (Username.Equals("lahiru111"))
+                        if (response.Data.Equals("Doctor"))
                         {
                             AppShellInstance.UpdateFlyoutMenuItems("doctor");
                         }

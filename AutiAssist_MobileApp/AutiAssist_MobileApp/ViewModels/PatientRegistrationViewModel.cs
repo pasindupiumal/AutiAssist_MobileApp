@@ -1,55 +1,54 @@
-﻿using System;
+﻿using AutiAssist_MobileApp.Models;
+using AutiAssist_MobileApp.Services;
+using AutiAssist_MobileApp.Views;
+using MvvmHelpers.Commands;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using AutiAssist_MobileApp.Models;
-using AutiAssist_MobileApp.Services;
-using AutiAssist_MobileApp.Views;
-using MvvmHelpers.Commands;
 using Xamarin.Forms;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
-    public class DoctorViewModel : BaseViewModel
+    public class PatientRegistrationViewModel : BaseViewModel
     {
         Random random = new Random();
-
         private string username = String.Empty;
         private string password = String.Empty;
         private string rePassword = String.Empty;
         private string firstName = String.Empty;
         private string lastName = String.Empty;
         private string email = String.Empty;
-        private string specialization = String.Empty;
         private string address = String.Empty;
-        private string nic = String.Empty;
         private string phoneNumber = String.Empty;
-        private string slmcRegNo = String.Empty;
+        private int age = 1;
+        private string gurdianName = String.Empty;
+        private string assignedDoctor = String.Empty;
         private Color usernameColor = Color.Black;
         private Color passwordColor = Color.Black;
+        private Color rePasswordColor = Color.Black;
         private Color firstNameColor = Color.Black;
         private Color lastNameColor = Color.Black;
         private Color emailColor = Color.Black;
-        private Color specializationColor = Color.Black;
         private Color addressColor = Color.Black;
-        private Color nicColor = Color.Black;
         private Color phoneNumberColor = Color.Black;
-        private Color slmcRegNoColor = Color.Black;
-        public AsyncCommand BacktoLoginCommand { get; }
-        public AsyncCommand DoctorRegisterCommand { get; }
+        private Color gurdianNameColor = Color.Black;
+        private Color assignedDoctorColor = Color.Black;
 
-        public DoctorViewModel()
+        public AsyncCommand BacktoLoginCommand { get; }
+        public AsyncCommand PatientRegisterCommand { get; }
+        public PatientRegistrationViewModel()
         {
             BacktoLoginCommand = new AsyncCommand(BackToLogin);
-            DoctorRegisterCommand = new AsyncCommand(RegisterDoctor);
+            PatientRegisterCommand = new AsyncCommand(RegisterPatient);
         }
         private async Task BackToLogin()
         {
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
-        private async Task RegisterDoctor()
+        private async Task RegisterPatient()
         {
             if (IsBusy)
             {
@@ -60,27 +59,27 @@ namespace AutiAssist_MobileApp.ViewModels
             {
                 IsBusy = true;
 
-                if (Username.Length != 0 && Password.Length != 0 && FirstName.Length != 0 && LastName.Length != 0 && Email.Length != 0 && Specialization.Length != 0 &&
-                Address.Length != 0 && NIC.Length != 0 && PhoneNumber.Length != 0 && SLMCRegNo.Length != 0 && RePasswordColor == Color.Black)
+                if (Username.Length != 0 && Password.Length != 0 && FirstName.Length != 0 && LastName.Length != 0 && Email.Length != 0 && GurdianName.Length != 0 &&
+                Address.Length != 0 && AgeColor == Color.Black && PhoneNumber.Length != 0 && AssignedDoctor.Length != 0 && RePasswordColor == Color.Black)
                 {
                     int ranNum = random.Next(1000000);
-                    string userID = "D" + ranNum.ToString();
+                    string userID = "P" + ranNum.ToString();
 
                     var user = new User
                     {
                         Id = userID,
                         Username = Username,
                         Password = Password,
-                        UserType = "Doctor",
-                        DoctorData = new Doctor
+                        UserType = "Patient",
+                        PatientData = new Patient
                         {
                             FirstName = FirstName,
                             LastName = LastName,
                             Email = Email,
-                            Specialization = Specialization,
+                            Age = Age,
                             Address = Address,
-                            NIC = NIC,
-                            SlmcRegNo = SLMCRegNo,
+                            GuardianName = GurdianName,
+                            AssignedDoctor = AssignedDoctor,
                             PhoneNumber = PhoneNumber
                         }
                     };
@@ -119,31 +118,27 @@ namespace AutiAssist_MobileApp.ViewModels
                     {
                         EmailColor = Color.Red;
                     }
-                    if (Specialization.Length == 0)
+                    if (AssignedDoctor.Length == 0)
                     {
-                        SpecializationColor = Color.Red;
+                        AssignedDoctorColor = Color.Red;
                     }
                     if (Address.Length == 0)
                     {
                         AddressColor = Color.Red;
                     }
-                    if (NIC.Length == 0)
+                    if (GurdianName.Length == 0)
                     {
-                        NicColor = Color.Red;
+                        GurdianNameColor = Color.Red;
                     }
                     if (PhoneNumber.Length == 0)
                     {
                         PhoneNumberColor = Color.Red;
                     }
-                    if (SLMCRegNo.Length == 0)
-                    {
-                        SlmcRegNoColor = Color.Red;
-                    }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Doctor Registration error: {ex.Message}");
+                Debug.WriteLine($"Patient Registration error: {ex.Message}");
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             finally
@@ -198,10 +193,19 @@ namespace AutiAssist_MobileApp.ViewModels
             set => SetProperty(ref emailColor, value);
         }
 
-        public Color SpecializationColor
+        public Color AgeColor
         {
-            get => specializationColor;
-            set => SetProperty(ref specializationColor, value);
+            get
+            {
+                if (Age <= 0 || Age > 120)
+                {
+                    return Color.Red;
+                }
+                else
+                {
+                    return Color.Black;
+                }
+            }
         }
 
         public Color AddressColor
@@ -210,10 +214,10 @@ namespace AutiAssist_MobileApp.ViewModels
             set => SetProperty(ref addressColor, value);
         }
 
-        public Color NicColor
+        public Color GurdianNameColor
         {
-            get => nicColor;
-            set => SetProperty(ref nicColor, value);
+            get => gurdianNameColor;
+            set => SetProperty(ref gurdianNameColor, value);
         }
 
         public Color PhoneNumberColor
@@ -222,16 +226,16 @@ namespace AutiAssist_MobileApp.ViewModels
             set => SetProperty(ref phoneNumberColor, value);
         }
 
-        public Color SlmcRegNoColor
+        public Color AssignedDoctorColor
         {
-            get => slmcRegNoColor;
-            set => SetProperty(ref slmcRegNoColor, value);
+            get => assignedDoctorColor;
+            set => SetProperty(ref assignedDoctorColor, value);
         }
 
         public string Username
         {
             get => username;
-            set { SetProperty(ref username, value); }
+            set => SetProperty(ref username, value);
         }
 
         public string Password
@@ -264,22 +268,10 @@ namespace AutiAssist_MobileApp.ViewModels
             set => SetProperty(ref email, value);
         }
 
-        public string Specialization
-        {
-            get => specialization;
-            set => SetProperty(ref specialization, value);
-        }
-
         public string Address
         {
             get => address;
             set => SetProperty(ref address, value);
-        }
-
-        public string NIC
-        {
-            get => nic;
-            set => SetProperty(ref nic, value);
         }
 
         public string PhoneNumber
@@ -288,10 +280,22 @@ namespace AutiAssist_MobileApp.ViewModels
             set => SetProperty(ref phoneNumber, value);
         }
 
-        public string SLMCRegNo
+        public int Age
         {
-            get => slmcRegNo;
-            set => SetProperty(ref slmcRegNo, value);
+            get => age;
+            set { SetProperty(ref age, value); OnPropertyChanged(nameof(AgeColor)); }
+        }
+
+        public string GurdianName
+        {
+            get => gurdianName;
+            set => SetProperty(ref gurdianName, value);
+        }
+
+        public string AssignedDoctor
+        {
+            get => assignedDoctor;
+            set => SetProperty(ref assignedDoctor, value);
         }
     }
 }

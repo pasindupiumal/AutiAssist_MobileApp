@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="AutiAssist_MobileApp.Views.ProfilePage"
+    x:Class="AutiAssist_MobileApp.Views.DoctorPatientsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:DoctorPatientsViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             <Label
                 HorizontalOptions="CenterAndExpand"
-                Text="Profile Page"
+                Text="Doctor - Patients List!"
                 VerticalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>

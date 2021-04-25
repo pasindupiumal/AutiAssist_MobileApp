@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace AutiAssist_MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PatientPage : ContentPage
+    public partial class DoctorProfilePage : ContentPage
     {
-        public PatientPage()
+        public DoctorProfilePage()
         {
             InitializeComponent();
         }

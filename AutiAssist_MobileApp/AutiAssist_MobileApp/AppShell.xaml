@@ -102,17 +102,32 @@
     <FlyoutItem
         x:Name="FlyoutItem_About"
         Title="About"
-        FlyoutItemIsVisible="False"
         Icon="icon_about.png">
         <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
     </FlyoutItem>
 
     <FlyoutItem
-        x:Name="FlyoutItem_Profile"
+        x:Name="FlyoutItem_PatientProfile"
         Title="Profile"
         FlyoutItemIsVisible="False"
         Icon="icon_about.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}" Route="ProfilePage" />
+        <ShellContent ContentTemplate="{DataTemplate local:PatientProfilePage}" Route="PatientProfilePage" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        x:Name="FlyoutItem_DoctorProfile"
+        Title="Profile"
+        FlyoutItemIsVisible="False"
+        Icon="icon_about.png">
+        <ShellContent ContentTemplate="{DataTemplate local:DoctorProfilePage}" Route="DoctorProfilePage" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        x:Name="FlyoutItem_DoctorPatients"
+        Title="Patients"
+        FlyoutItemIsVisible="False"
+        Icon="icon_about.png">
+        <ShellContent ContentTemplate="{DataTemplate local:DoctorPatientsPage}" Route="DoctorPatientsPage" />
     </FlyoutItem>
 
     <FlyoutItem
@@ -122,10 +137,10 @@
         Route="RegisterPage"
         Shell.FlyoutBehavior="Disabled">
         <Tab Title="Doctor" Icon="icon_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:DoctorPage}" Route="DoctorPage" />
+            <ShellContent ContentTemplate="{DataTemplate local:DoctorRegistrationPage}" Route="DoctorRegistrationPage" />
         </Tab>
         <Tab Title="Patient" Icon="icon_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:PatientPage}" Route="PatientPage" />
+            <ShellContent ContentTemplate="{DataTemplate local:PatientRegistrationPage}" Route="PatientRegistrationPage" />
         </Tab>
     </FlyoutItem>
 
