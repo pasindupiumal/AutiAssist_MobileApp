@@ -128,7 +128,7 @@
                         IsRunning="{Binding IsBusy}"
                         IsVisible="{Binding IsBusy}"
                         Scale="0.8"
-                        Color="Black" />
+                        Color="Blue" />
                 </StackLayout>
                 <StackLayout
                     Grid.Row="6"
