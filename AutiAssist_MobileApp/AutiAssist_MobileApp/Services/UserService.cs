@@ -22,11 +22,11 @@ namespace AutiAssist_MobileApp.Services
             };
         }
 
-        public static async Task<Response> Login(string email, string password)
+        public static async Task<Response> Login(string username, string password)
         {
             var credentials = new Credential
             {
-                Username = email,
+                Username = username,
                 Password = password
             };
 
@@ -62,9 +62,9 @@ namespace AutiAssist_MobileApp.Services
             }
         }
 
-        public static async Task<Response> AddNewUser()
+        public static async Task<Response> AddNewUser(User user)
         {
-            var user = new User
+            var user1 = new User
             {
                 Id = "000004",
                 Username = "Chamika",
@@ -106,7 +106,7 @@ namespace AutiAssist_MobileApp.Services
 
             try
             {
-                var json = JsonConvert.SerializeObject(user2);
+                var json = JsonConvert.SerializeObject(user);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("Users/", content);
                 var addNewUserResponse = await response.Content.ReadAsStringAsync();
@@ -117,7 +117,7 @@ namespace AutiAssist_MobileApp.Services
                     failedResponse = new Response();
                     failedResponse.Message = "Error connecting to server";
                     Debug.WriteLine($"Error connecting to server");
-                    return failedResponse;
+                    return failedResponse;      
                 }
                 else
                 {
@@ -131,12 +131,6 @@ namespace AutiAssist_MobileApp.Services
                 return failedResponse;
             }
         }
-
-
-
-
-
-
 
         //public static async Task RemoveCoffee(int id)
         //{

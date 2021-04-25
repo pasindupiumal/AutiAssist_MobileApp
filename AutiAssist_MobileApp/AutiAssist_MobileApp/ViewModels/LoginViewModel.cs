@@ -14,7 +14,7 @@ namespace AutiAssist_MobileApp.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private string email = String.Empty;
+        private string username = String.Empty;
         private string password = String.Empty;
         public AsyncCommand LoginCommand { get; }
         public AsyncCommand RegisterCommand { get; }
@@ -25,10 +25,10 @@ namespace AutiAssist_MobileApp.ViewModels
             RegisterCommand = new AsyncCommand(OnRegisterClicked);
         }
 
-        public string Email
+        public string Username
         {
-            get => email;
-            set => SetProperty(ref email, value);
+            get => username;
+            set => SetProperty(ref username, value);
         }
 
         public string Password
@@ -47,9 +47,9 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 IsBusy = true;
-                var AppShellInstance = Xamarin.Forms.Shell.Current as AppShell;
+                var AppShellInstance = Shell.Current as AppShell;
 
-                Response response = await UserService.Login(Email, Password);
+                Response response = await UserService.Login(Username, Password);
 
                 if(response == null)
                 {
@@ -59,7 +59,7 @@ namespace AutiAssist_MobileApp.ViewModels
                 {
                     if (response.Message.Equals("Login Successful"))
                     {
-                        if (Email.Equals("lahiru111"))
+                        if (Username.Equals("lahiru111"))
                         {
                             AppShellInstance.UpdateFlyoutMenuItems("doctor");
                         }
@@ -68,7 +68,7 @@ namespace AutiAssist_MobileApp.ViewModels
                             AppShellInstance.UpdateFlyoutMenuItems("patient");
                         }
 
-                        Email = String.Empty;
+                        Username = String.Empty;
                         Password = String.Empty;
                         await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                     }
@@ -93,7 +93,7 @@ namespace AutiAssist_MobileApp.ViewModels
 
         private async Task OnRegisterClicked()
         {
-            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+            await Shell.Current.GoToAsync($"//RegisterPage");
         }
     }
 }

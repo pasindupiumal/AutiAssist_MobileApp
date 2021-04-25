@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AutiAssist_MobileApp.Views"
-    xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels"
     Title="AutiAssist_MobileApp">
 
     <!--
@@ -88,11 +87,11 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <FlyoutItem FlyoutItemIsVisible="False">
+    <FlyoutItem FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled">
         <ShellContent ContentTemplate="{DataTemplate local:SplashPage}" Route="SplashPage" />
     </FlyoutItem>
 
-    <FlyoutItem FlyoutItemIsVisible="False">
+    <FlyoutItem FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
     </FlyoutItem>
 
@@ -118,11 +117,10 @@
 
     <FlyoutItem
         Title="Register"
-        FlyoutItemIsVisible="True"
-        Icon="icon_about.png">
-        <Tab Title="Register" Icon="icon_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:RegisterPage}" Route="RegisterPage" />
-        </Tab>
+        FlyoutItemIsVisible="False"
+        Icon="icon_about.png"
+        Route="RegisterPage"
+        Shell.FlyoutBehavior="Disabled">
         <Tab Title="Doctor" Icon="icon_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:DoctorPage}" Route="DoctorPage" />
         </Tab>

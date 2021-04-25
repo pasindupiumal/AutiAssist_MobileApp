@@ -34,11 +34,11 @@ namespace AutiAssist_MobileApp.ViewModels
 
             IsBusy = true;
 
-            Response response = await UserService.AddNewUser();
+            //Response response = await UserService.AddNewUser();
 
             IsBusy = false;
 
-            Response = response.Message;
+            //Response = response.Message;
         }
     }
 }

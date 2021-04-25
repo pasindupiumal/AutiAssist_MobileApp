@@ -2,13 +2,448 @@
 <ContentPage
     x:Class="AutiAssist_MobileApp.Views.PatientPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels"
+    Shell.NavBarIsVisible="False">
+    <ContentPage.BindingContext>
+        <vm:PatientViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Patient Page"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <Grid RowSpacing="{OnPlatform iOS=25, Android=18}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackLayout
+                    Grid.Row="1"
+                    Margin="0,0,0,20"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical">
+                    <Label
+                        Margin="0,0,0,5"
+                        FontAttributes="Bold"
+                        FontSize="26"
+                        HorizontalOptions="Center"
+                        Text="Patient Registration"
+                        TextColor="{OnPlatform Android=Black}"
+                        WidthRequest="300" />
+                    <Label
+                        FontSize="15"
+                        Text="Sign up to continue"
+                        TextColor="Black"
+                        WidthRequest="300" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="2"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="{OnPlatform iOS=300,
+                                              Android=300}">
+                    <Label
+                        FontSize="{OnPlatform Android=13}"
+                        Text="Username"
+                        TextColor="Black" />
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            MaxLength="25"
+                            Placeholder="stephenduff"
+                            Text="{Binding Username}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="3"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Password"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            IsPassword="True"
+                            MaxLength="25"
+                            Placeholder="******************"
+                            Text="{Binding Password, Mode=TwoWay}" />
+                    </Frame>
+                    <StackLayout
+                        Margin="0,0,0,5"
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            IsVisible="{Binding PasswordMatch}"
+                            Text="Passwords do not match"
+                            TextColor="Red"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="4"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Re-Enter Password"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            IsPassword="True"
+                            MaxLength="25"
+                            Placeholder="******************"
+                            Text="{Binding RePassword, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="5"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="First Name"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            MaxLength="25"
+                            Placeholder="Stephen"
+                            Text="{Binding FirstName, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="6"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Last Name"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            MaxLength="25"
+                            Placeholder="Duff"
+                            Text="{Binding LastName, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="7"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Email"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Keyboard="Email"
+                            MaxLength="25"
+                            Placeholder="stephen.duff@gmail.com"
+                            Text="{Binding Email, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="8"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Age"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Keyboard="Numeric"
+                            MaxLength="25"
+                            Placeholder="10"
+                            Text="{Binding Age, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="9"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Address"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Keyboard="Text"
+                            MaxLength="50"
+                            Placeholder="2 Nichols Street Garland"
+                            Text="{Binding Address, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="10"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Guardian Name"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Keyboard="Text"
+                            MaxLength="25"
+                            Placeholder="James Duff"
+                            Text="{Binding GurdianName, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="11"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Assigned Doctor"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Keyboard="Numeric"
+                            MaxLength="25"
+                            Placeholder="001"
+                            Text="{Binding AssignedDoctor, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="12"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical"
+                    WidthRequest="300">
+                    <StackLayout
+                        Padding="0"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center">
+                        <Label
+                            FontSize="{OnPlatform Android=13}"
+                            Text="Phone Number"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </StackLayout>
+                    <Frame
+                        Padding="{OnPlatform Android=8,
+                                             iOS=0}"
+                        CornerRadius="{OnPlatform Android=7}"
+                        HasShadow="{OnPlatform Android=true,
+                                               iOS=false}">
+                        <Entry
+                            FontSize="{OnPlatform Android=15,
+                                                  iOS=16}"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Keyboard="Telephone"
+                            MaxLength="25"
+                            Placeholder="+15417543010"
+                            Text="{Binding PhoneNumber, Mode=TwoWay}" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="13"
+                    Padding="0"
+                    HorizontalOptions="Center">
+                    <ActivityIndicator
+                        IsRunning="{Binding IsBusy}"
+                        IsVisible="{Binding IsBusy}"
+                        Scale="0.8"
+                        Color="Black" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="14"
+                    HorizontalOptions="Center"
+                    Orientation="Vertical">
+                    <Button
+                        BackgroundColor="#fcfcfc"
+                        BorderColor="#f2f2f2"
+                        BorderWidth="1.5"
+                        Command="{Binding PatientRegisterCommand}"
+                        Font="Montserrat-Medium.otf"
+                        FontSize="{OnPlatform Android=15}"
+                        HeightRequest="50"
+                        IsEnabled="{Binding IsNotBusy}"
+                        Text="Register"
+                        TextColor="Black"
+                        WidthRequest="300" />
+                    <Button
+                        BackgroundColor="White"
+                        Command="{Binding BacktoLoginCommand}"
+                        FontSize="{OnPlatform Android=11,
+                                              iOS=12}"
+                        IsEnabled="{Binding IsNotBusy}"
+                        Text="Don't have an account? Sign Up"
+                        TextColor="{OnPlatform iOS=Black}" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

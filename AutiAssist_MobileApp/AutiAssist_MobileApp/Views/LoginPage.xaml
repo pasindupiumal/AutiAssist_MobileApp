@@ -59,7 +59,7 @@
                                               Android=300}">
                     <Label
                         FontSize="{OnPlatform Android=13}"
-                        Text="Email"
+                        Text="Username"
                         TextColor="Black" />
                     <Frame
                         Padding="{OnPlatform Android=8,
@@ -73,8 +73,8 @@
                             IsEnabled="{Binding IsNotBusy}"
                             Keyboard="Email"
                             MaxLength="25"
-                            Placeholder="BFortuna@gmail.com"
-                            Text="{Binding Email, Mode=TwoWay}" />
+                            Placeholder="stephenduff"
+                            Text="{Binding Username, Mode=TwoWay}" />
                     </Frame>
                 </StackLayout>
                 <StackLayout
