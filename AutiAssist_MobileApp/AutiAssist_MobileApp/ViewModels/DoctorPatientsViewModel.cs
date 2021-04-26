@@ -74,6 +74,7 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 InitialLoad = true;
+                await Task.Delay(4000);
                 Patients.Clear();
                 var patients = await UserService.GetPatientsByDoctor("doctorone");
 
