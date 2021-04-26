@@ -3,17 +3,78 @@
     x:Class="AutiAssist_MobileApp.Views.DoctorPatientsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:AutiAssist_MobileApp.Models"
     xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="PageOfDoctorPatients"
     Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:DoctorPatientsViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Doctor - Patients List!"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ListView
+                Grid.ColumnSpan="2"
+                BackgroundColor="Transparent"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                ItemsSource="{Binding Patients}"
+                RefreshCommand="{Binding RefreshCommand}"
+                RefreshControlColor="Blue"
+                SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
+                SeparatorColor="Transparent"
+                SeparatorVisibility="Default">
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                        Command="{Binding SelectedCommand}"
+                        EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
+                        EventName="ItemSelected" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:User">
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Frame CornerRadius="20" HasShadow="True">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout VerticalOptions="Center">
+                                            <Label
+                                                FontSize="Large"
+                                                Text="{Binding PatientData.FirstName}"
+                                                VerticalOptions="Center" />
+                                            <Label
+                                                FontSize="Large"
+                                                Text="{Binding PatientData.LastName}"
+                                                VerticalOptions="Center" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="FillAndExpand"
+                IsRunning="{Binding InitialLoad}"
+                IsVisible="{Binding InitialLoad}"
                 VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

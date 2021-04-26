@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutiAssist_MobileApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,11 @@ namespace AutiAssist_MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DoctorPatientsPage : ContentPage
     {
+        //private DoctorPatientsViewModel doctorPatientViewModel;
         public DoctorPatientsPage()
         {
             InitializeComponent();
+            //BindingContext = doctorPatientViewModel = new DoctorPatientsViewModel();
         }
     }
 }
