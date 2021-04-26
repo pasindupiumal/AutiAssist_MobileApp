@@ -51,6 +51,7 @@
                             <Grid Padding="10">
                                 <Frame CornerRadius="20" HasShadow="True">
                                     <StackLayout Orientation="Horizontal">
+                                        <Image Source="def_user.png" WidthRequest="75" />
                                         <StackLayout VerticalOptions="Center">
                                             <Label
                                                 FontSize="Large"

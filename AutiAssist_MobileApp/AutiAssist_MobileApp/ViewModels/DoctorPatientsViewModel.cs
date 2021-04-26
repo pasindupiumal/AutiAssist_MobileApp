@@ -8,6 +8,7 @@ using AutiAssist_MobileApp.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
@@ -15,6 +16,7 @@ namespace AutiAssist_MobileApp.ViewModels
     {
         public ObservableRangeCollection<User> Patients { get; set; }
         public AsyncCommand RefreshCommand { get; }
+        public AsyncCommand GetPatientsCommand { get; }
         public AsyncCommand<object> SelectedCommand { get; }
 
         User selectedPatient;
@@ -38,7 +40,8 @@ namespace AutiAssist_MobileApp.ViewModels
             Patients = new ObservableRangeCollection<User>();
             RefreshCommand = new AsyncCommand(Refresh);
             SelectedCommand = new AsyncCommand<object>(Selected);
-            Task.Run(async () => await GetPatients());
+            GetPatientsCommand = new AsyncCommand(GetPatients);
+            //Task.Run(async () => await GetPatients());
         }
 
         private async Task Refresh()
@@ -52,9 +55,19 @@ namespace AutiAssist_MobileApp.ViewModels
             {
                 IsBusy = true;
                 Patients.Clear();
-                var patients = await UserService.GetPatientsByDoctor("doctorone");
+                var doctorUsername = Preferences.Get("username", null);
+
+                if(doctorUsername != null)
+                {
+                    var patients = await UserService.GetPatientsByDoctor(doctorUsername);
+
+                    Patients.AddRange(patients.Data);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", "Error obtaining patient data", "OK");
+                }
                 
-                Patients.AddRange(patients.Data);
 
                 IsBusy = false;
             }
@@ -74,11 +87,21 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 InitialLoad = true;
-                await Task.Delay(4000);
+                //await Task.Delay(4000);
                 Patients.Clear();
-                var patients = await UserService.GetPatientsByDoctor("doctorone");
+                var doctorUsername = Preferences.Get("username", null);
 
-                Patients.AddRange(patients.Data);
+                if(doctorUsername != null)
+                {
+                    var patients = await UserService.GetPatientsByDoctor(doctorUsername);
+
+                    Patients.AddRange(patients.Data);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", "Error obtaining patient data", "OK");
+                }
+                
 
                 InitialLoad = false;
             }
@@ -105,6 +128,11 @@ namespace AutiAssist_MobileApp.ViewModels
             SelectedPatient = null;
 
             await Application.Current.MainPage.DisplayAlert("Patient Selected", patient.Username, "OK");
+        }
+
+        public void ClearList()
+        {
+            Patients.Clear();
         }
     }
 }

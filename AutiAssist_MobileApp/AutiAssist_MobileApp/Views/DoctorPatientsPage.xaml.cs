@@ -13,11 +13,21 @@ namespace AutiAssist_MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DoctorPatientsPage : ContentPage
     {
-        //private DoctorPatientsViewModel doctorPatientViewModel;
+        private DoctorPatientsViewModel doctorPatientViewModel;
         public DoctorPatientsPage()
         {
             InitializeComponent();
-            //BindingContext = doctorPatientViewModel = new DoctorPatientsViewModel();
+            BindingContext = doctorPatientViewModel = new DoctorPatientsViewModel();
+        }
+
+        protected async override void OnAppearing()
+        {
+            await doctorPatientViewModel.GetPatientsCommand.ExecuteAsync();
+        }
+
+        protected override void OnDisappearing()
+        {
+            doctorPatientViewModel.ClearList();
         }
     }
 }

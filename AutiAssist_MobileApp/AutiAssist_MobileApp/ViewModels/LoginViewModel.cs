@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using AutiAssist_MobileApp.Models;
 using AutiAssist_MobileApp.Services;
 using AutiAssist_MobileApp.Views;
-using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
@@ -62,14 +62,17 @@ namespace AutiAssist_MobileApp.ViewModels
                         if (response.Data.Equals("Doctor"))
                         {
                             AppShellInstance.UpdateFlyoutMenuItems("doctor");
+                            Preferences.Set("user_type", "Doctor");
                         }
                         else
                         {
                             AppShellInstance.UpdateFlyoutMenuItems("patient");
+                            Preferences.Set("user_type", "Patient");
                         }
 
-                        Username = String.Empty;
+                        Preferences.Set("username", Username);
                         Password = String.Empty;
+                        Username = String.Empty;
                         await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                     }
                     else
