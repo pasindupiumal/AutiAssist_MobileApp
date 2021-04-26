@@ -94,6 +94,39 @@ namespace AutiAssist_MobileApp.Services
             }
         }
 
+        public static async Task<UserResponse> GetPatientsByDoctor(string assignedDoctor)
+        {
+            UserResponse failedResponse = null;
+
+            try
+            {
+                //var json = JsonConvert.SerializeObject(user);
+                //var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync($"Users/patients/{assignedDoctor}", null);
+                var getPatientsResponse = await response.Content.ReadAsStringAsync();
+                var defaultResponseObject = JsonConvert.DeserializeObject<UserResponse>(getPatientsResponse);
+                //var patients = JsonConvert.DeserializeObject<IEnumerable<User>>(defaultResponseObject.Data);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    failedResponse = new UserResponse();
+                    failedResponse.Message = "Error connecting to server";
+                    Debug.WriteLine($"Error connecting to server");
+                    return failedResponse;
+                }
+                else
+                {
+                    return defaultResponseObject;
+                }
+            }
+            catch (Exception ex)
+            {
+                failedResponse.Message = "Retrieving patients by doctor operation failed. Exception occured";
+                Debug.WriteLine($"Patient retrieval error : {ex.Message}");
+                return failedResponse;
+            }
+        }
+
         //public static async Task RemoveCoffee(int id)
         //{
         //    var response = await client.DeleteAsync($"api/Coffee/{id}");

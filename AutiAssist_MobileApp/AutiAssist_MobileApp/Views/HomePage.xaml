@@ -11,6 +11,11 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Label HorizontalOptions="Center" Text="Home" />
+            <Button
+                Command="{Binding ButtonClick}"
+                HorizontalOptions="Center"
+                Text="Click Here"
+                VerticalOptions="Center" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
