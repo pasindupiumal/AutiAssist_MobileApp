@@ -17,7 +17,7 @@ namespace AutiAssist_MobileApp.ViewModels
 
         public DoctorPatientDetailsViewModel()
         {
-            //Title = "Patient Details";
+            Title = "Patient Details";
         }
 
         public string UserObject
@@ -41,7 +41,6 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 Patient = JsonConvert.DeserializeObject<User>(userObject);
-                Title = Patient.Username;
             }
             catch (Exception)
             {
