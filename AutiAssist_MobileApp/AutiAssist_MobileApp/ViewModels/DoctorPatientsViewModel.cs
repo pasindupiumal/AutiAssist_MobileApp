@@ -9,6 +9,8 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using AutiAssist_MobileApp.Views;
+using Newtonsoft.Json;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
@@ -127,7 +129,9 @@ namespace AutiAssist_MobileApp.ViewModels
 
             SelectedPatient = null;
 
-            await Application.Current.MainPage.DisplayAlert("Patient Selected", patient.Username, "OK");
+            string userObject = JsonConvert.SerializeObject(patient);
+            //await Application.Current.MainPage.DisplayAlert("Patient Selected", patient.Username, "OK");
+            await Shell.Current.GoToAsync($"{nameof(DoctorPatientDetailsPage)}?{nameof(DoctorPatientDetailsViewModel.UserObject)}={userObject}");
         }
 
         public void ClearList()

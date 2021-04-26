@@ -11,6 +11,7 @@ namespace AutiAssist_MobileApp
         {
             InitializeComponent();
             //Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(DoctorPatientDetailsPage), typeof(DoctorPatientDetailsPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
