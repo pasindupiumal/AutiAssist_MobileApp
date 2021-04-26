@@ -134,7 +134,7 @@
         x:Name="FlyoutItem_DoctorPatients"
         Title="Patients"
         FlyoutItemIsVisible="False"
-        Icon="patients.png">
+        Icon="patient_reg.png">
         <ShellContent ContentTemplate="{DataTemplate local:DoctorPatientsPage}" Route="DoctorPatientsPage" />
     </FlyoutItem>
 
@@ -144,10 +144,10 @@
         Icon="icon_about.png"
         Route="RegisterPage"
         Shell.FlyoutBehavior="Disabled">
-        <Tab Title="Doctor" Icon="icon_feed.png">
+        <Tab Title="Doctor" Icon="patients.png">
             <ShellContent ContentTemplate="{DataTemplate local:DoctorRegistrationPage}" Route="DoctorRegistrationPage" />
         </Tab>
-        <Tab Title="Patient" Icon="icon_feed.png">
+        <Tab Title="Patient" Icon="patient_reg.png">
             <ShellContent ContentTemplate="{DataTemplate local:PatientRegistrationPage}" Route="PatientRegistrationPage" />
         </Tab>
     </FlyoutItem>
