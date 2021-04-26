@@ -13,10 +13,11 @@ namespace AutiAssist_MobileApp.ViewModels
     public class DoctorPatientDetailsViewModel : BaseViewModel
     {
         private string userObject;
+        private User patient;
 
         public DoctorPatientDetailsViewModel()
         {
-            Title = "Patient Details";
+            //Title = "Patient Details";
         }
 
         public string UserObject
@@ -29,11 +30,18 @@ namespace AutiAssist_MobileApp.ViewModels
             }
         }
 
+        public User Patient
+        {
+            get => patient;
+            set => SetProperty(ref patient, value);
+        }
+
         public void LoadPatientData(string userObject)
         {
             try
             {
-                User patient = JsonConvert.DeserializeObject<User>(userObject);
+                Patient = JsonConvert.DeserializeObject<User>(userObject);
+                Title = Patient.Username;
             }
             catch (Exception)
             {

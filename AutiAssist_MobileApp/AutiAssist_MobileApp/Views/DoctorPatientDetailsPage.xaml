@@ -35,14 +35,23 @@
                 Source="def_user.png"
                 VerticalOptions="Center"
                 WidthRequest="200" />
-            <Label
+            <StackLayout
                 Grid.Row="3"
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
-                FontSize="Large"
                 HorizontalOptions="CenterAndExpand"
-                Text="John Cena"
-                VerticalOptions="Start" />
+                Orientation="Horizontal"
+                VerticalOptions="Start">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Text="{Binding Patient.PatientData.FirstName}" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Text="{Binding Patient.PatientData.LastName}" />
+            </StackLayout>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
