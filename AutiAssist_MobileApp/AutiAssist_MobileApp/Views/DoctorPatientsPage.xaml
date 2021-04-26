@@ -49,18 +49,54 @@
                     <DataTemplate x:DataType="model:User">
                         <ViewCell>
                             <Grid Padding="10">
-                                <Frame CornerRadius="20" HasShadow="True">
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="20"
+                                    HasShadow="True">
                                     <StackLayout Orientation="Horizontal">
                                         <Image Source="def_user.png" WidthRequest="75" />
-                                        <StackLayout VerticalOptions="Center">
-                                            <Label
-                                                FontSize="Large"
-                                                Text="{Binding PatientData.FirstName}"
-                                                VerticalOptions="Center" />
-                                            <Label
-                                                FontSize="Large"
-                                                Text="{Binding PatientData.LastName}"
-                                                VerticalOptions="Center" />
+                                        <StackLayout Orientation="Vertical">
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Large"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding PatientData.FirstName}"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Large"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding PatientData.LastName}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding PatientData.Age, StringFormat='Age - {0}'}"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    Margin="30,0,0,0"
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Text="{Binding PatientData.PhoneNumber}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding PatientData.GuardianName, StringFormat='Guardian - {0}'}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding PatientData.Email}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
                                 </Frame>
