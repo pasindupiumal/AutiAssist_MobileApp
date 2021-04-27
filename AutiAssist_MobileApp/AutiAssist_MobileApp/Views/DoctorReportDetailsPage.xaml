@@ -32,6 +32,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -344,7 +345,17 @@
                     BackgroundColor="#03FF27"
                     CornerRadius="20"
                     HorizontalOptions="CenterAndExpand"
-                    Text="Access Patient Records"
+                    Text="Access Facial Recognition Data"
+                    VerticalOptions="End" />
+                <Button
+                    Grid.Row="17"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    BackgroundColor="#03FF27"
+                    CornerRadius="20"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Access Vitals Data"
                     VerticalOptions="End" />
             </Grid>
         </ScrollView>
