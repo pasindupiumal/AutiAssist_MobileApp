@@ -35,8 +35,8 @@ namespace AutiAssist_MobileApp.ViewModels
         public DoctorPatientReportsViewModel()
         {
             Title = "Patient Reports";
-            PopulateReports();
             Reports = new ObservableRangeCollection<Report>();
+            PopulateReports();
             RefreshCommand = new AsyncCommand(Refresh);
             SelectedCommand = new AsyncCommand<object>(Selected);
             GetReportsCommand = new AsyncCommand(GetReports);
@@ -51,11 +51,15 @@ namespace AutiAssist_MobileApp.ViewModels
 
             try
             {
-               
+                IsBusy = true;
+                PopulateReports();
+
+                await Task.Delay(3000);
+                IsBusy = false;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Unable to get patients: {ex.Message}");
+                Debug.WriteLine($"Unable to get patient reports: {ex.Message}");
                 await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
             }
             finally
@@ -69,12 +73,13 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 InitialLoad = true;
-               
+                await Task.Delay(3000);
+                PopulateReports();
                 InitialLoad = false;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Unable to get patients: {ex.Message}");
+                Debug.WriteLine($"Unable to get patient reports: {ex.Message}");
                 await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
             }
             finally
@@ -95,7 +100,7 @@ namespace AutiAssist_MobileApp.ViewModels
             SelectedReport = null;
 
             //string userObject = JsonConvert.SerializeObject(patient);
-            //await Application.Current.MainPage.DisplayAlert("Patient Selected", patient.Username, "OK");
+            await Application.Current.MainPage.DisplayAlert("Patient Selected", report.Id, "OK");
             //await Shell.Current.GoToAsync($"{nameof(DoctorPatientDetailsPage)}?{nameof(DoctorPatientDetailsViewModel.UserObject)}={userObject}");
         }
 

@@ -3,16 +3,136 @@
     x:Class="AutiAssist_MobileApp.Views.DoctorPatientReportsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels">
+    xmlns:model="clr-namespace:AutiAssist_MobileApp.Models"
+    xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:DoctorPatientReportsViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Patient Reports!"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ListView
+                Grid.ColumnSpan="2"
+                BackgroundColor="Transparent"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                ItemsSource="{Binding Reports}"
+                RefreshCommand="{Binding RefreshCommand}"
+                RefreshControlColor="Blue"
+                SelectedItem="{Binding SelectedReport, Mode=TwoWay}"
+                SeparatorColor="Transparent"
+                SeparatorVisibility="Default">
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                        Command="{Binding SelectedCommand}"
+                        EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
+                        EventName="ItemSelected" />
+                </ListView.Behaviors>
+                <ListView.Header>
+                    <StackLayout
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal">
+                        <SearchBar
+                            Margin="0,30,0,10"
+                            BackgroundColor="Transparent"
+                            CancelButtonColor="Red"
+                            HorizontalTextAlignment="Center"
+                            Placeholder="Search By Repord ID........"
+                            PlaceholderColor="Black"
+                            TextColor="Black"
+                            VerticalOptions="CenterAndExpand" />
+                        <Image
+                            Margin="0,30,60,10"
+                            BackgroundColor="Transparent"
+                            Source="search_icon.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25" />
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Report">
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    CornerRadius="20"
+                                    HasShadow="True">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="def_user.png" WidthRequest="75" />
+                                        <StackLayout Orientation="Vertical">
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Large"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding Id}"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Large"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding UserID}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding Username}"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    Margin="30,0,0,0"
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Text="{Binding ActivityID}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding SessionID}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding PredictedAutismScore}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="FillAndExpand"
+                IsRunning="{Binding InitialLoad}"
+                IsVisible="{Binding InitialLoad}"
                 VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
