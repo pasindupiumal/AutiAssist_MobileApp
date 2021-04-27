@@ -127,20 +127,36 @@ namespace AutiAssist_MobileApp.Services
             }
         }
 
-        //public static async Task RemoveCoffee(int id)
-        //{
-        //    var response = await client.DeleteAsync($"api/Coffee/{id}");
+        public static async Task<SingleUserResponse> GetUserByUsername(string username)
+        {
+            SingleUserResponse failedResponse = null;
 
-        //    if (!response.IsSuccessStatusCode)
-        //    {
+            try
+            {
+                var response = await client.GetAsync($"Users/{username}");
+                var getUserResponse = await response.Content.ReadAsStringAsync();
+                var defaultResponseObject = JsonConvert.DeserializeObject<SingleUserResponse>(getUserResponse);
 
-        //    }
-        //}
-        //public static async Task<IEnumerable<Coffee>> GetCoffee()
-        //{
-        //    var json = await client.GetStringAsync("api/Coffee");
-        //    var coffees = JsonConvert.DeserializeObject<IEnumerable<Coffee>>(json);
-        //    return coffees;
-        //}
+                if (!response.IsSuccessStatusCode)
+                {
+                    failedResponse = new SingleUserResponse();
+                    failedResponse.Message = "Error connecting to server";
+                    Debug.WriteLine($"Error connecting to server");
+                    return failedResponse;
+                }
+                else
+                {
+                    return defaultResponseObject;
+                }
+            }
+            catch (Exception ex)
+            {
+                failedResponse.Message = "Retrieving user by username operation failed. Exception occured";
+                Debug.WriteLine($"User retrieval error : {ex.Message}");
+                return failedResponse;
+            }
+        }
+
+
     }
 }

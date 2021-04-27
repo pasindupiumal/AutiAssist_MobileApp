@@ -22,28 +22,19 @@ namespace AutiAssist_MobileApp.ViewModels
 
         async Task ClickHere()
         {
-            UserResponse response = await UserService.GetPatientsByDoctor("doctorone");
+            //Response response = await UserService.GetUserByUsername("doctorone");
+            //string match = "User retrieved for username - " + "doctorone";
 
-            if(response.Message.Equals("Selected patients retrieved"))
-            {
-                //await Application.Current.MainPage.DisplayAlert("Success", "In Here, "OK");
-
-                string name = "";
-
-                foreach(User user in response.Data)
-                {
-                    name += " " + user.Username;
-                }
-
-                await Application.Current.MainPage.DisplayAlert("Success", name, "OK");
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Success", response.Message, "OK");
-            }
-            
-
-            
+           
+            //if (response.Message.Equals(match))
+            //{
+                
+            //    await Application.Current.MainPage.DisplayAlert("Success", response.Message, "OK");
+            //}
+            //else
+            //{
+            //    await Application.Current.MainPage.DisplayAlert("Error", response.Message, "OK");
+            //}
         }
     }
 }
