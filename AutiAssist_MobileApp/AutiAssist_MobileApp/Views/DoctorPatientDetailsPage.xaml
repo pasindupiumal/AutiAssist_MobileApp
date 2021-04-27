@@ -212,6 +212,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="4"
                     BackgroundColor="#03FF27"
+                    Command="{Binding GoToReportsCommand}"
                     CornerRadius="20"
                     HorizontalOptions="CenterAndExpand"
                     Text="Access Patient Records"
