@@ -45,6 +45,28 @@
                         EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"
                         EventName="ItemSelected" />
                 </ListView.Behaviors>
+                <ListView.Header>
+                    <StackLayout
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal">
+                        <SearchBar
+                            Margin="0,30,0,10"
+                            BackgroundColor="Transparent"
+                            CancelButtonColor="Red"
+                            HorizontalTextAlignment="Center"
+                            Placeholder="Search By Patient Name..."
+                            PlaceholderColor="Black"
+                            TextColor="Black"
+                            VerticalOptions="CenterAndExpand" />
+                        <Image
+                            Margin="0,30,60,10"
+                            BackgroundColor="Transparent"
+                            Source="search_icon.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25" />
+                    </StackLayout>
+                </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:User">
                         <ViewCell>
