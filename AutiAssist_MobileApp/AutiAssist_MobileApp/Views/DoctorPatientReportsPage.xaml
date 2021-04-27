@@ -6,6 +6,7 @@
     xmlns:model="clr-namespace:AutiAssist_MobileApp.Models"
     xmlns:vm="clr-namespace:AutiAssist_MobileApp.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="PageOfDoctorPatientReports"
     Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:DoctorPatientReportsViewModel />
@@ -45,16 +46,27 @@
                         EventName="ItemSelected" />
                 </ListView.Behaviors>
                 <ListView.Header>
-                    <StackLayout
+                    <SearchBar
+                        Margin="0,30,0,10"
+                        BackgroundColor="LightBlue"
+                        CancelButtonColor="Red"
+                        HeightRequest="45"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Placeholder="Enter Report ID"
+                        PlaceholderColor="Black"
+                        TextColor="Black"
+                        VerticalOptions="CenterAndExpand" />
+                    <!--<StackLayout
                         BackgroundColor="Transparent"
                         HorizontalOptions="CenterAndExpand"
                         Orientation="Horizontal">
                         <SearchBar
                             Margin="0,30,0,10"
-                            BackgroundColor="Transparent"
+                            BackgroundColor="LightBlue"
                             CancelButtonColor="Red"
                             HorizontalTextAlignment="Center"
-                            Placeholder="Search By Repord ID........"
+                            Placeholder="Enter Report ID"
                             PlaceholderColor="Black"
                             TextColor="Black"
                             VerticalOptions="CenterAndExpand" />
@@ -64,7 +76,7 @@
                             Source="search_icon.png"
                             VerticalOptions="CenterAndExpand"
                             WidthRequest="25" />
-                    </StackLayout>
+                    </StackLayout>-->
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:Report">
@@ -75,47 +87,59 @@
                                     CornerRadius="20"
                                     HasShadow="True">
                                     <StackLayout Orientation="Horizontal">
-                                        <Image Source="def_user.png" WidthRequest="75" />
+                                        <Image Source="report.png" WidthRequest="75" />
                                         <StackLayout Orientation="Vertical">
                                             <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
                                                 <Label
                                                     FontAttributes="Bold"
                                                     FontSize="Large"
                                                     HorizontalOptions="Start"
-                                                    Text="{Binding Id}"
-                                                    VerticalOptions="Center" />
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    FontSize="Large"
-                                                    HorizontalOptions="Start"
-                                                    Text="{Binding UserID}"
+                                                    Text="{Binding Id, StringFormat='Report ID - {0}'}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                             <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
                                                 <Label
                                                     FontSize="Medium"
                                                     HorizontalOptions="Start"
-                                                    Text="{Binding Username}"
+                                                    Text="{Binding BindingContext.Name, StringFormat='Patient Name - {0}', Source={x:Reference Name=PageOfDoctorPatientReports}}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
-                                                <Label
+                                                <!--<Label
                                                     Margin="30,0,0,0"
                                                     FontSize="Medium"
-                                                    HorizontalOptions="EndAndExpand"
-                                                    Text="{Binding ActivityID}"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding BindingContext.Patient.PatientData.LastName, Source={x:Reference Name=PageOfDoctorPatientReports}}"
+                                                    VerticalOptions="Center" />-->
+                                            </StackLayout>
+                                            <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding SessionID, StringFormat='Session - {0}'}"
+                                                    TextColor="Black"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding ActivityID, StringFormat='Activity - {0}'}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                             <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
                                                 <Label
                                                     FontSize="Medium"
                                                     HorizontalOptions="Start"
-                                                    Text="{Binding SessionID}"
+                                                    Text="{Binding TimeStamp, StringFormat='Created On - {0}'}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                             <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
                                                 <Label
                                                     FontSize="Medium"
                                                     HorizontalOptions="Start"
-                                                    Text="{Binding PredictedAutismScore}"
+                                                    Text="{Binding PredictedAutismScore, StringFormat='Autism Score - {0}'}"
+                                                    TextColor="Green"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                         </StackLayout>

@@ -84,12 +84,14 @@
                                                     FontSize="Large"
                                                     HorizontalOptions="Start"
                                                     Text="{Binding PatientData.FirstName}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                                 <Label
                                                     FontAttributes="Bold"
                                                     FontSize="Large"
                                                     HorizontalOptions="Start"
                                                     Text="{Binding PatientData.LastName}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                             <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
@@ -97,12 +99,14 @@
                                                     FontSize="Medium"
                                                     HorizontalOptions="Start"
                                                     Text="{Binding PatientData.Age, StringFormat='Age - {0}'}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                                 <Label
                                                     Margin="30,0,0,0"
                                                     FontSize="Medium"
                                                     HorizontalOptions="EndAndExpand"
                                                     Text="{Binding PatientData.PhoneNumber}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                             <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
@@ -110,6 +114,7 @@
                                                     FontSize="Medium"
                                                     HorizontalOptions="Start"
                                                     Text="{Binding PatientData.GuardianName, StringFormat='Guardian - {0}'}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                             <StackLayout Margin="20,0,0,0" Orientation="Horizontal">
@@ -117,6 +122,7 @@
                                                     FontSize="Medium"
                                                     HorizontalOptions="Start"
                                                     Text="{Binding PatientData.Email}"
+                                                    TextColor="Black"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                         </StackLayout>

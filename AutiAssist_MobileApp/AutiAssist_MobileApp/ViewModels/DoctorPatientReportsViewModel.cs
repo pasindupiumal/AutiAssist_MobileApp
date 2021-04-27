@@ -7,11 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Xamarin.Forms;
+using Newtonsoft.Json;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
+    [QueryProperty(nameof(UserObject), nameof(UserObject))]
     public class DoctorPatientReportsViewModel : BaseViewModel
     {
+        private string userObject;
+        private User patient;
+
         public ObservableRangeCollection<Report> Reports { get; set; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand GetReportsCommand { get; }
@@ -27,6 +32,36 @@ namespace AutiAssist_MobileApp.ViewModels
             set => SetProperty(ref initialLoad, value);
         }
 
+        public string UserObject
+        {
+            get => userObject;
+            set
+            {
+                userObject = value;
+                LoadPatientData(value);
+            }
+        }
+
+        public string Name { get; set; }
+
+        public User Patient
+        {
+            get => patient;
+            set => SetProperty(ref patient, value);
+        }
+
+        private void LoadPatientData(string userObject)
+        {
+            try
+            {
+                Patient = JsonConvert.DeserializeObject<User>(userObject);
+                Name = Patient.PatientData.FirstName + " " + Patient.PatientData.LastName; 
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Doctor - Patient Reports | Failed to Load Patient");
+            }
+        }
         public Report SelectedReport
         {
             get => selectedReport;
@@ -115,12 +150,12 @@ namespace AutiAssist_MobileApp.ViewModels
 
             var report1 = new Report
             {
-                Id = "00001",
+                Id = "RP00001",
                 UserID = "P001",
                 Username = "patientone",
                 SessionID = "s001",
                 ActivityID = "a01",
-                TimeStamp = "2017-01-23T12:34:56",
+                TimeStamp = "25 May 2021",
                 ActivityResult = new ActivityResult
                 {
                     ActivityID = "a01",
@@ -145,12 +180,12 @@ namespace AutiAssist_MobileApp.ViewModels
 
             var report2 = new Report
             {
-                Id = "00002",
+                Id = "RP00002",
                 UserID = "P002",
                 Username = "patienttwo",
                 SessionID = "s001",
                 ActivityID = "a01",
-                TimeStamp = "2017-01-23T12:34:56",
+                TimeStamp = "26 May 2021",
                 ActivityResult = new ActivityResult
                 {
                     ActivityID = "a01",
@@ -175,12 +210,12 @@ namespace AutiAssist_MobileApp.ViewModels
 
             var report3 = new Report
             {
-                Id = "00003",
+                Id = "RP00003",
                 UserID = "P003",
                 Username = "patientthree",
                 SessionID = "s001",
                 ActivityID = "a01",
-                TimeStamp = "2017-01-23T12:34:56",
+                TimeStamp = "27 May 2021",
                 ActivityResult = new ActivityResult
                 {
                     ActivityID = "a01",

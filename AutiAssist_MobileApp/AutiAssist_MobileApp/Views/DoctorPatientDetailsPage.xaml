@@ -56,11 +56,13 @@
                     <Label
                         FontAttributes="Bold"
                         FontSize="Large"
-                        Text="{Binding Patient.PatientData.FirstName}" />
+                        Text="{Binding Patient.PatientData.FirstName}"
+                        TextColor="Black" />
                     <Label
                         FontAttributes="Bold"
                         FontSize="Large"
-                        Text="{Binding Patient.PatientData.LastName}" />
+                        Text="{Binding Patient.PatientData.LastName}"
+                        TextColor="Black" />
                 </StackLayout>
                 <Frame
                     Grid.Row="4"
@@ -82,7 +84,8 @@
                                 FontAttributes="Bold"
                                 FontSize="Large"
                                 HorizontalOptions="CenterAndExpand"
-                                Text="Autism Level" />
+                                Text="Autism Level"
+                                TextColor="Black" />
                         </StackLayout>
                         <StackLayout>
                             <Label
@@ -96,12 +99,14 @@
                             <Label
                                 FontSize="Medium"
                                 HorizontalOptions="StartAndExpand"
-                                Text="Last Updated On" />
+                                Text="Last Updated On"
+                                TextColor="Black" />
 
                             <Label
                                 FontSize="Medium"
                                 HorizontalOptions="EndAndExpand"
-                                Text="22 October 2020" />
+                                Text="22 October 2020"
+                                TextColor="Black" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -115,6 +120,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="Guardian Name : "
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="6"
@@ -125,6 +131,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="{Binding Patient.PatientData.GuardianName}"
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="7"
@@ -136,6 +143,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="Patient Age : "
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="7"
@@ -145,6 +153,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="{Binding Patient.PatientData.Age}"
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="8"
@@ -156,6 +165,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="Phone Number : "
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="8"
@@ -165,6 +175,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="{Binding Patient.PatientData.PhoneNumber}"
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="9"
@@ -176,6 +187,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="Email Address : "
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="9"
@@ -185,6 +197,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="{Binding Patient.PatientData.Email}"
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="10"
@@ -196,6 +209,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="Patient Address : "
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="10"
@@ -205,6 +219,7 @@
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
                     Text="{Binding Patient.PatientData.Address}"
+                    TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
                 <Button
                     Grid.Row="11"

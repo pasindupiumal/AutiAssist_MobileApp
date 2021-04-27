@@ -56,7 +56,7 @@ namespace AutiAssist_MobileApp.ViewModels
 
         private async Task NavigateToReports()
         {
-            await Shell.Current.GoToAsync($"{nameof(DoctorPatientReportsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(DoctorPatientReportsPage)}?{nameof(DoctorPatientReportsViewModel.UserObject)}={UserObject}");
         }
     }
 }
