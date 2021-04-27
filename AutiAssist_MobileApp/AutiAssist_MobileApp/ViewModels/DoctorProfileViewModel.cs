@@ -21,7 +21,6 @@ namespace AutiAssist_MobileApp.ViewModels
         {
             Title = "Profile";
             GetProfileDataCommand = new AsyncCommand(GetDoctor);
-            Task.Run(() => GetProfileDataCommand.ExecuteAsync());
         }
 
         public User Doctor

@@ -18,12 +18,12 @@ namespace AutiAssist_MobileApp.Views
         {
             InitializeComponent();
 
-            //BindingContext = doctorProfileViewModel = new DoctorProfileViewModel();
+            BindingContext = doctorProfileViewModel = new DoctorProfileViewModel();
         }
 
-        //protected async override void OnAppearing()
-        //{
-        //    await doctorProfileViewModel.GetProfileDataCommand.ExecuteAsync();
-        //}
+        protected async override void OnAppearing()
+        {
+            await doctorProfileViewModel.GetProfileDataCommand.ExecuteAsync();
+        }
     }
 }
