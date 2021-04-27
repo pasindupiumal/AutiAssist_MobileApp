@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Newtonsoft.Json;
+using AutiAssist_MobileApp.Views;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
@@ -134,9 +135,11 @@ namespace AutiAssist_MobileApp.ViewModels
 
             SelectedReport = null;
 
-            //string userObject = JsonConvert.SerializeObject(patient);
-            await Application.Current.MainPage.DisplayAlert("Patient Selected", report.Id, "OK");
-            //await Shell.Current.GoToAsync($"{nameof(DoctorPatientDetailsPage)}?{nameof(DoctorPatientDetailsViewModel.UserObject)}={userObject}");
+            report.Username = Name;
+            report.PredictedAutismLevel = Patient.PatientData.Age.ToString();
+
+            string reportObject = JsonConvert.SerializeObject(report);
+            await Shell.Current.GoToAsync($"{nameof(DoctorReportDetailsPage)}?{nameof(DoctorReportDetailsViewModel.ReportObject)}={reportObject}");
         }
 
         public void ClearList()
@@ -168,7 +171,7 @@ namespace AutiAssist_MobileApp.ViewModels
                     NoOfImagesProcessed = 10000,
                     OverallResult = "Happy"
                 },
-                vitalResult = new Vitals
+                VitalResult = new Vitals
                 {
                     HaertBeat = "110",
                     TestField1 = "T001",
@@ -198,7 +201,7 @@ namespace AutiAssist_MobileApp.ViewModels
                     NoOfImagesProcessed = 10000,
                     OverallResult = "Happy"
                 },
-                vitalResult = new Vitals
+                VitalResult = new Vitals
                 {
                     HaertBeat = "110",
                     TestField1 = "T001",
@@ -228,7 +231,7 @@ namespace AutiAssist_MobileApp.ViewModels
                     NoOfImagesProcessed = 10000,
                     OverallResult = "Happy"
                 },
-                vitalResult = new Vitals
+                VitalResult = new Vitals
                 {
                     HaertBeat = "110",
                     TestField1 = "T001",

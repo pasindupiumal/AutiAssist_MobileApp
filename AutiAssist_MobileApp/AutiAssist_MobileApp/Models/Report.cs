@@ -32,7 +32,7 @@ namespace AutiAssist_MobileApp.Models
         public FacialRecognition FacialRecognitionResult { get; set; }
 
         [JsonProperty("vitalResult")]
-        public Vitals vitalResult { get; set; }
+        public Vitals VitalResult { get; set; }
 
         [JsonProperty("predictedAutismScore")]
         public string PredictedAutismScore { get; set; }
