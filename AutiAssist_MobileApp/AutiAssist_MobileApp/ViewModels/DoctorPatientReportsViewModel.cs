@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Newtonsoft.Json;
 using AutiAssist_MobileApp.Views;
+using AutiAssist_MobileApp.Services;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
@@ -17,11 +19,27 @@ namespace AutiAssist_MobileApp.ViewModels
     {
         private string userObject;
         private User patient;
+        private string userType;
+        private string username;
 
         public ObservableRangeCollection<Report> Reports { get; set; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand GetReportsCommand { get; }
         public AsyncCommand<object> SelectedCommand { get; }
+
+        public Xamarin.Forms.Command ClearListCommand { get; }
+
+        public DoctorPatientReportsViewModel()
+        {
+            Title = "Patient Reports";
+            Reports = new ObservableRangeCollection<Report>();
+            RefreshCommand = new AsyncCommand(Refresh);
+            SelectedCommand = new AsyncCommand<object>(Selected);
+            GetReportsCommand = new AsyncCommand(GetReports);
+            ClearListCommand = new Xamarin.Forms.Command(ClearList);
+            userType = Preferences.Get("user_type", null);
+            username = Preferences.Get("username", null);
+        }
 
         Report selectedReport;
 
@@ -68,16 +86,7 @@ namespace AutiAssist_MobileApp.ViewModels
             get => selectedReport;
             set => SetProperty(ref selectedReport, value);
         }
-        public DoctorPatientReportsViewModel()
-        {
-            Title = "Patient Reports";
-            Reports = new ObservableRangeCollection<Report>();
-            PopulateReports();
-            RefreshCommand = new AsyncCommand(Refresh);
-            SelectedCommand = new AsyncCommand<object>(Selected);
-            GetReportsCommand = new AsyncCommand(GetReports);
-        }
-
+        
         private async Task Refresh()
         {
             if (IsBusy)
@@ -88,9 +97,47 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 IsBusy = true;
-                PopulateReports();
+                if (userType != null)
+                {
+                    if (userType.Equals("Doctor"))
+                    {
+                        ReportListResponse response = await ReportService.GetReportsByUsername(Patient.Username);
 
-                await Task.Delay(3000);
+                        string match = "All reports under " + Patient.Username + " retrieved";
+
+                        if (response.Message.Equals(match))
+                        {
+                            ClearList();
+                            Reports.AddRange(response.Data);
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
+                        }
+                    }
+                    else
+                    {
+                        ReportListResponse response = await ReportService.GetReportsByUsername(username);
+
+                        string match = "All reports under " + username + " retrieved";
+
+                        if (response.Message.Equals(match))
+                        {
+                            ClearList();
+                            Reports.AddRange(response.Data);
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine($"Reports by username. Preferences error");
+                    await Application.Current.MainPage.DisplayAlert("Error!", "Preferences error", "OK");
+                }
+
                 IsBusy = false;
             }
             catch (Exception ex)
@@ -106,11 +153,56 @@ namespace AutiAssist_MobileApp.ViewModels
 
         private async Task GetReports()
         {
+            if (InitialLoad)
+            {
+                return;
+            }
+
             try
             {
                 InitialLoad = true;
-                await Task.Delay(3000);
-                PopulateReports();
+                
+                if(userType != null)
+                {
+                    if (userType.Equals("Doctor"))
+                    {
+                        ReportListResponse response = await ReportService.GetReportsByUsername(Patient.Username);
+
+                        string match = "All reports under " + Patient.Username + " retrieved";
+                        
+                        if (response.Message.Equals(match))
+                        {
+                            ClearList();
+                            Reports.AddRange(response.Data);
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
+                        }
+                    }
+                    else
+                    {
+                        ReportListResponse response = await ReportService.GetReportsByUsername(username);
+
+                        string match = "All reports under " + username + " retrieved";
+
+                        if (response.Message.Equals(match))
+                        {
+                            ClearList();
+                            Reports.AddRange(response.Data);
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error!", response.Message, "OK");
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine($"Reports by username. Preferences error");
+                    await Application.Current.MainPage.DisplayAlert("Error!", "Preferences error", "OK");
+                }
+
                 InitialLoad = false;
             }
             catch (Exception ex)
@@ -142,111 +234,9 @@ namespace AutiAssist_MobileApp.ViewModels
             await Shell.Current.GoToAsync($"{nameof(DoctorReportDetailsPage)}?{nameof(DoctorReportDetailsViewModel.ReportObject)}={reportObject}");
         }
 
-        public void ClearList()
+        private void ClearList()
         {
             Reports.Clear();
-        }
-
-        private void PopulateReports()
-        {
-            ClearList();
-
-            var report1 = new Report
-            {
-                Id = "RP00001",
-                UserID = "P001",
-                Username = "patientone",
-                SessionID = "s001",
-                ActivityID = "a01",
-                TimeStamp = "25 May 2021",
-                ActivityResult = new ActivityResult
-                {
-                    ActivityID = "a01",
-                    OverallScore = 90,
-                    NumberOfTries = 3,
-                    LevelReached = 2
-                },
-                FacialRecognitionResult = new FacialRecognition
-                {
-                    NoOfImagesProcessed = 10000,
-                    OverallResult = "Happy"
-                },
-                VitalResult = new Vitals
-                {
-                    HaertBeat = "110",
-                    TestField1 = "T001",
-                    TestField2 = "T002"
-                },
-                PredictedAutismLevel = "Level 2",
-                PredictedAutismScore = "0.3"
-            };
-
-            var report2 = new Report
-            {
-                Id = "RP00002",
-                UserID = "P002",
-                Username = "patienttwo",
-                SessionID = "s001",
-                ActivityID = "a01",
-                TimeStamp = "26 May 2021",
-                ActivityResult = new ActivityResult
-                {
-                    ActivityID = "a01",
-                    OverallScore = 90,
-                    NumberOfTries = 3,
-                    LevelReached = 2
-                },
-                FacialRecognitionResult = new FacialRecognition
-                {
-                    NoOfImagesProcessed = 10000,
-                    OverallResult = "Happy"
-                },
-                VitalResult = new Vitals
-                {
-                    HaertBeat = "110",
-                    TestField1 = "T001",
-                    TestField2 = "T002"
-                },
-                PredictedAutismLevel = "Level 2",
-                PredictedAutismScore = "0.3"
-            };
-
-            var report3 = new Report
-            {
-                Id = "RP00003",
-                UserID = "P003",
-                Username = "patientthree",
-                SessionID = "s001",
-                ActivityID = "a01",
-                TimeStamp = "27 May 2021",
-                ActivityResult = new ActivityResult
-                {
-                    ActivityID = "a01",
-                    OverallScore = 90,
-                    NumberOfTries = 3,
-                    LevelReached = 2
-                },
-                FacialRecognitionResult = new FacialRecognition
-                {
-                    NoOfImagesProcessed = 10000,
-                    OverallResult = "Happy"
-                },
-                VitalResult = new Vitals
-                {
-                    HaertBeat = "110",
-                    TestField1 = "T001",
-                    TestField2 = "T002"
-                },
-                PredictedAutismLevel = "Level 2",
-                PredictedAutismScore = "0.3"
-            };
-
-            List<Report> reports = new List<Report>();
-            reports.Add(report1);
-            reports.Add(report2);
-            reports.Add(report3);
-
-            Reports.AddRange(reports);
         }
     }
 }
