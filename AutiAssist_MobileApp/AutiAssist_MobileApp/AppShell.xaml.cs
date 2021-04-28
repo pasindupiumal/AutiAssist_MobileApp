@@ -30,12 +30,14 @@ namespace AutiAssist_MobileApp
                 FlyoutItem_PatientProfile.FlyoutItemIsVisible = true;
                 FlyoutItem_DoctorProfile.FlyoutItemIsVisible = false;
                 FlyoutItem_DoctorPatients.FlyoutItemIsVisible = false;
+                FlyoutItem_PatientProfileReports.FlyoutItemIsVisible = true;
             }
             else if(user.ToLower().Equals("doctor"))
             {
                 FlyoutItem_PatientProfile.FlyoutItemIsVisible = false;
                 FlyoutItem_DoctorProfile.FlyoutItemIsVisible = true;
                 FlyoutItem_DoctorPatients.FlyoutItemIsVisible = true;
+                FlyoutItem_PatientProfileReports.FlyoutItemIsVisible = false;
             }
             else
             {

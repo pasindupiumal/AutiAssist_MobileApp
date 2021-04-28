@@ -97,7 +97,8 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 IsBusy = true;
-                if (userType != null)
+
+                if (userType != null && username != null)
                 {
                     if (userType.Equals("Doctor"))
                     {
@@ -162,7 +163,7 @@ namespace AutiAssist_MobileApp.ViewModels
             {
                 InitialLoad = true;
                 
-                if(userType != null)
+                if(userType != null && username != null)
                 {
                     if (userType.Equals("Doctor"))
                     {
@@ -226,9 +227,36 @@ namespace AutiAssist_MobileApp.ViewModels
             }
 
             SelectedReport = null;
+            
+            if(userType != null && username != null)
+            {
+                if (userType.Equals("Doctor"))
+                {
+                    report.Username = Name;
+                    report.PredictedAutismLevel = Patient.PatientData.Age.ToString();
+                }
+                else
+                {
+                    SingleUserResponse responseObject = await UserService.GetUserByUsername(username);
 
-            report.Username = Name;
-            report.PredictedAutismLevel = Patient.PatientData.Age.ToString();
+                    string match = "User retrieved for username - " + username;
+
+                    if (responseObject.Message.Equals(match))
+                    {
+                        User newPatient = responseObject.Data;
+                        report.Username = newPatient.PatientData.FirstName + " " + newPatient.PatientData.LastName;
+                        report.PredictedAutismLevel = newPatient.PatientData.Age.ToString();
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error!", responseObject.Message, "OK");
+                    }
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error!", "Preferences error!", "OK");
+            }
 
             string reportObject = JsonConvert.SerializeObject(report);
             await Shell.Current.GoToAsync($"{nameof(DoctorReportDetailsPage)}?{nameof(DoctorReportDetailsViewModel.ReportObject)}={reportObject}");

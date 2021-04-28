@@ -108,18 +108,19 @@
     </FlyoutItem>
 
     <FlyoutItem
-        x:Name="FlyoutItem_About"
-        Title="About"
-        Icon="about.png">
-        <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
-    </FlyoutItem>
-
-    <FlyoutItem
         x:Name="FlyoutItem_PatientProfile"
         Title="Profile"
         FlyoutItemIsVisible="False"
         Icon="profile.png">
         <ShellContent ContentTemplate="{DataTemplate local:PatientProfilePage}" Route="PatientProfilePage" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        x:Name="FlyoutItem_PatientProfileReports"
+        Title="Reports"
+        FlyoutItemIsVisible="False"
+        Icon="report.png">
+        <ShellContent ContentTemplate="{DataTemplate local:DoctorPatientReportsPage}" Route="DoctorPatientReportsPage" />
     </FlyoutItem>
 
     <FlyoutItem
@@ -136,6 +137,13 @@
         FlyoutItemIsVisible="False"
         Icon="patient_reg.png">
         <ShellContent ContentTemplate="{DataTemplate local:DoctorPatientsPage}" Route="DoctorPatientsPage" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        x:Name="FlyoutItem_About"
+        Title="About"
+        Icon="about.png">
+        <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" Route="AboutPage" />
     </FlyoutItem>
 
     <FlyoutItem
