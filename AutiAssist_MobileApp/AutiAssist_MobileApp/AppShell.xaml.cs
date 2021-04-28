@@ -1,6 +1,7 @@
 ﻿using AutiAssist_MobileApp.Views;
 using System;
 using System.Collections.Generic;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AutiAssist_MobileApp
@@ -20,6 +21,7 @@ namespace AutiAssist_MobileApp
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
             Shell.Current.FlyoutIsPresented = false;
+            Preferences.Clear();
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 

@@ -23,13 +23,11 @@ namespace AutiAssist_MobileApp.Views
 
         protected async override void OnAppearing()
         {
-            base.OnAppearing();
             await doctorPatientReportsViewModel.GetReportsCommand.ExecuteAsync();
         }
 
         protected override void OnDisappearing()
         {
-            base.OnDisappearing();
             doctorPatientReportsViewModel.ClearListCommand.Execute(null);
 
         }

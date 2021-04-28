@@ -19,8 +19,6 @@ namespace AutiAssist_MobileApp.ViewModels
     {
         private string userObject;
         private User patient;
-        private string userType;
-        private string username;
 
         public ObservableRangeCollection<Report> Reports { get; set; }
         public AsyncCommand RefreshCommand { get; }
@@ -37,8 +35,6 @@ namespace AutiAssist_MobileApp.ViewModels
             SelectedCommand = new AsyncCommand<object>(Selected);
             GetReportsCommand = new AsyncCommand(GetReports);
             ClearListCommand = new Xamarin.Forms.Command(ClearList);
-            userType = Preferences.Get("user_type", null);
-            username = Preferences.Get("username", null);
         }
 
         Report selectedReport;
@@ -98,7 +94,12 @@ namespace AutiAssist_MobileApp.ViewModels
             {
                 IsBusy = true;
 
-                if (userType != null && username != null)
+                Reports.Clear();
+
+                string username = Preferences.Get("username", null);
+                string userType = Preferences.Get("user_type", null);
+
+                if (userType != null)
                 {
                     if (userType.Equals("Doctor"))
                     {
@@ -126,6 +127,8 @@ namespace AutiAssist_MobileApp.ViewModels
                         {
                             ClearList();
                             Reports.AddRange(response.Data);
+                            //await Application.Current.MainPage.DisplayAlert("Success", username, "OK");
+
                         }
                         else
                         {
@@ -162,8 +165,11 @@ namespace AutiAssist_MobileApp.ViewModels
             try
             {
                 InitialLoad = true;
-                
-                if(userType != null && username != null)
+
+                string username = Preferences.Get("username", null);
+                string userType = Preferences.Get("user_type", null);
+
+                if (userType != null && username != null)
                 {
                     if (userType.Equals("Doctor"))
                     {
@@ -183,6 +189,8 @@ namespace AutiAssist_MobileApp.ViewModels
                     }
                     else
                     {
+                        await GetPatientData(username);
+
                         ReportListResponse response = await ReportService.GetReportsByUsername(username);
 
                         string match = "All reports under " + username + " retrieved";
@@ -217,6 +225,24 @@ namespace AutiAssist_MobileApp.ViewModels
             }
         }
 
+        private async Task GetPatientData(string username)
+        {
+            SingleUserResponse responseObject = await UserService.GetUserByUsername(username);
+
+            string match = "User retrieved for username - " + username;
+
+            if (responseObject.Message.Equals(match))
+            {
+                Patient = responseObject.Data;
+                Name = Patient.PatientData.FirstName + " " + Patient.PatientData.LastName;
+            }
+            else
+            {
+                Debug.WriteLine($"User data retrieval for reports opreation failed.");
+                await Application.Current.MainPage.DisplayAlert("Error!", responseObject.Message, "OK");
+            }
+        }
+
         private async Task Selected(object args)
         {
             var report = args as Report;
@@ -227,36 +253,9 @@ namespace AutiAssist_MobileApp.ViewModels
             }
 
             SelectedReport = null;
-            
-            if(userType != null && username != null)
-            {
-                if (userType.Equals("Doctor"))
-                {
-                    report.Username = Name;
-                    report.PredictedAutismLevel = Patient.PatientData.Age.ToString();
-                }
-                else
-                {
-                    SingleUserResponse responseObject = await UserService.GetUserByUsername(username);
 
-                    string match = "User retrieved for username - " + username;
-
-                    if (responseObject.Message.Equals(match))
-                    {
-                        User newPatient = responseObject.Data;
-                        report.Username = newPatient.PatientData.FirstName + " " + newPatient.PatientData.LastName;
-                        report.PredictedAutismLevel = newPatient.PatientData.Age.ToString();
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Error!", responseObject.Message, "OK");
-                    }
-                }
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error!", "Preferences error!", "OK");
-            }
+            report.Username = Patient.PatientData.FirstName + " " + Patient.PatientData.LastName;
+            report.PredictedAutismLevel = Patient.PatientData.Age.ToString();
 
             string reportObject = JsonConvert.SerializeObject(report);
             await Shell.Current.GoToAsync($"{nameof(DoctorReportDetailsPage)}?{nameof(DoctorReportDetailsViewModel.ReportObject)}={reportObject}");
