@@ -63,17 +63,20 @@ namespace AutiAssist_MobileApp.ViewModels
                         {
                             AppShellInstance.UpdateFlyoutMenuItems("doctor");
                             Preferences.Set("user_type", "Doctor");
+                            Preferences.Set("username", Username);
+                            Password = String.Empty;
+                            Username = String.Empty;
+                            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                         }
                         else
                         {
                             AppShellInstance.UpdateFlyoutMenuItems("patient");
                             Preferences.Set("user_type", "Patient");
+                            Preferences.Set("username", Username);
+                            Password = String.Empty;
+                            Username = String.Empty;
+                            await Shell.Current.GoToAsync($"//{nameof(PatientProfilePage)}");
                         }
-
-                        Preferences.Set("username", Username);
-                        Password = String.Empty;
-                        Username = String.Empty;
-                        await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                     }
                     else
                     {

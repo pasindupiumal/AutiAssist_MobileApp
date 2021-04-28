@@ -21,10 +21,8 @@ namespace AutiAssist_MobileApp.ViewModels
         public bool PasswordSwitch
         {
             get => passwordSwitch;
-            set { SetProperty(ref passwordSwitch, value); OnPropertyChanged(nameof(PasswordSwitchVisibility)); }
+            set { SetProperty(ref passwordSwitch, value); }
         }
-
-        public bool PasswordSwitchVisibility => !PasswordSwitch;
 
         public AsyncCommand GetProfileDataCommand { get; }
         public DoctorProfileViewModel()
@@ -49,13 +47,13 @@ namespace AutiAssist_MobileApp.ViewModels
             {
                 IsBusy = true;
 
-                await Task.Delay(4000);
+                //await Task.Delay(4000);
 
                 var doctorUsername = Preferences.Get("username", null);
 
                 if (doctorUsername != null)
                 {
-                    var responseObject = await UserService.GetUserByUsername(doctorUsername);
+                    SingleUserResponse responseObject = await UserService.GetUserByUsername(doctorUsername);
 
                     string match = "User retrieved for username - " + doctorUsername;
 
