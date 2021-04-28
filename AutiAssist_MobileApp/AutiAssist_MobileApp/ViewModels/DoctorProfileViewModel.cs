@@ -16,6 +16,16 @@ namespace AutiAssist_MobileApp.ViewModels
     {
         private User doctor;
 
+        private bool passwordSwitch;
+
+        public bool PasswordSwitch
+        {
+            get => passwordSwitch;
+            set { SetProperty(ref passwordSwitch, value); OnPropertyChanged(nameof(PasswordSwitchVisibility)); }
+        }
+
+        public bool PasswordSwitchVisibility => !PasswordSwitch;
+
         public AsyncCommand GetProfileDataCommand { get; }
         public DoctorProfileViewModel()
         {
