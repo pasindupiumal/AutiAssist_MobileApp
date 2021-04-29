@@ -8,34 +8,62 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace AutiAssist_MobileApp.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        public AsyncCommand ButtonClick { get; set; }
+        private FrequentActivity frequentActivity;
+
+        public FrequentActivity FrequentActivity
+        {
+            get => frequentActivity;
+            set => SetProperty(ref frequentActivity, value);
+        }
+        public AsyncCommand GetActivitiesCommand { get; set; }
 
         public HomeViewModel()
         {
             Title = "Home";
-            ButtonClick = new AsyncCommand(ClickHere);
+            GetActivitiesCommand = new AsyncCommand(GetActivities);
         }
 
-        async Task ClickHere()
+        private async Task GetActivities()
         {
-            //Response response = await UserService.GetUserByUsername("doctorone");
-            //string match = "User retrieved for username - " + "doctorone";
+            if (IsBusy)
+            {
+                return;
+            }
 
-           
-            //if (response.Message.Equals(match))
-            //{
-                
-            //    await Application.Current.MainPage.DisplayAlert("Success", response.Message, "OK");
-            //}
-            //else
-            //{
-            //    await Application.Current.MainPage.DisplayAlert("Error", response.Message, "OK");
-            //}
+            try
+            {
+                IsBusy = true;
+
+                //await Task.Delay(4000);
+
+                FrequentActivityResponse responseObject = await ReportService.GetFrequentActivities();
+
+                string match = "All Data retrieved";
+
+                if (responseObject.Message.Equals(match))
+                {
+                    FrequentActivity = responseObject.Data;
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", responseObject.Message, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to get frequent activities data: {ex.Message}");
+                await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

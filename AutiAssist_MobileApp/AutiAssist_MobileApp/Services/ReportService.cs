@@ -51,5 +51,35 @@ namespace AutiAssist_MobileApp.Services
                 return failedResponse;
             }
         }
+
+        public static async Task<FrequentActivityResponse> GetFrequentActivities()
+        {
+            FrequentActivityResponse failedResponse = null;
+
+            try
+            {
+                var response = await client.GetAsync($"Frequent");
+                var getFAResponse = await response.Content.ReadAsStringAsync();
+                var defaultResponseObject = JsonConvert.DeserializeObject<FrequentActivityResponse>(getFAResponse);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    failedResponse = new FrequentActivityResponse();
+                    failedResponse.Message = "Error connecting to server";
+                    Debug.WriteLine($"Error connecting to server");
+                    return failedResponse;
+                }
+                else
+                {
+                    return defaultResponseObject;
+                }
+            }
+            catch (Exception ex)
+            {
+                failedResponse.Message = "Retrieving frequent activities operation failed. Exception occured";
+                Debug.WriteLine($"Frequent activities retrieval error : {ex.Message}");
+                return failedResponse;
+            }
+        }
     }
 }

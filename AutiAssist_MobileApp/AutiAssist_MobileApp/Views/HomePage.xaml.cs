@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutiAssist_MobileApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,17 @@ namespace AutiAssist_MobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        private HomeViewModel homeViewModel;
         public HomePage()
         {
             InitializeComponent();
+
+            BindingContext = homeViewModel = new HomeViewModel();
+        }
+
+        protected async override void OnAppearing()
+        {
+            await homeViewModel.GetActivitiesCommand.ExecuteAsync();
         }
     }
 }

@@ -103,7 +103,7 @@
                                     FontAttributes="Bold"
                                     FontSize="Large"
                                     HorizontalOptions="CenterAndExpand"
-                                    Text="Game 01"
+                                    Text="{Binding FrequentActivity.AgeActivity1}"
                                     TextColor="Blue" />
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
@@ -141,7 +141,7 @@
                                     FontAttributes="Bold"
                                     FontSize="Large"
                                     HorizontalOptions="CenterAndExpand"
-                                    Text="SLMC Registration Number"
+                                    Text="Age Category Two"
                                     TextColor="Black" />
                             </StackLayout>
                             <StackLayout>
@@ -149,7 +149,7 @@
                                     FontAttributes="Bold"
                                     FontSize="Large"
                                     HorizontalOptions="CenterAndExpand"
-                                    Text="{Binding Doctor.DoctorData.SlmcRegNo}"
+                                    Text="{Binding FrequentActivity.AgeActivity2}"
                                     TextColor="Blue" />
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
@@ -187,7 +187,7 @@
                                     FontAttributes="Bold"
                                     FontSize="Large"
                                     HorizontalOptions="CenterAndExpand"
-                                    Text="SLMC Registration Number"
+                                    Text="Age Category Three"
                                     TextColor="Black" />
                             </StackLayout>
                             <StackLayout>
@@ -195,7 +195,7 @@
                                     FontAttributes="Bold"
                                     FontSize="Large"
                                     HorizontalOptions="CenterAndExpand"
-                                    Text="{Binding Doctor.DoctorData.SlmcRegNo}"
+                                    Text="{Binding FrequentActivity.AgeActivity3}"
                                     TextColor="Blue" />
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
