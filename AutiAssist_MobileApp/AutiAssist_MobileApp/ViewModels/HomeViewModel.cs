@@ -22,11 +22,13 @@ namespace AutiAssist_MobileApp.ViewModels
             set => SetProperty(ref frequentActivity, value);
         }
         public AsyncCommand GetActivitiesCommand { get; set; }
+        public AsyncCommand TrainDataCommand { get; set; }
 
         public HomeViewModel()
         {
             Title = "Home";
             GetActivitiesCommand = new AsyncCommand(GetActivities);
+            TrainDataCommand = new AsyncCommand(UpdateData);
         }
 
         private async Task GetActivities()
@@ -58,6 +60,44 @@ namespace AutiAssist_MobileApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get frequent activities data: {ex.Message}");
+                await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private async Task UpdateData()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+
+            try
+            {
+                IsBusy = true;
+
+                //await Task.Delay(4000);
+
+                string responseObject = await ScoringModelService.Train();
+
+                string match = "Data Updated Successfully";
+
+                if (responseObject.Equals(match))
+                {
+                    await GetActivitiesCommand.ExecuteAsync();
+                    await Application.Current.MainPage.DisplayAlert("Success", "Trained and updated successfully", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", responseObject, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to perform train data operation: {ex.Message}");
                 await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "OK");
             }
             finally

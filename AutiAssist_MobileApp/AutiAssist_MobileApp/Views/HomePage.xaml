@@ -38,6 +38,8 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -213,6 +215,17 @@
                             </StackLayout>
                         </StackLayout>
                     </Frame>
+                    <Button
+                        Grid.Row="16"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BackgroundColor="#03FF27"
+                        Command="{Binding TrainDataCommand}"
+                        CornerRadius="20"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Train and Update Data"
+                        VerticalOptions="CenterAndExpand" />
 
                 </Grid>
             </ScrollView>

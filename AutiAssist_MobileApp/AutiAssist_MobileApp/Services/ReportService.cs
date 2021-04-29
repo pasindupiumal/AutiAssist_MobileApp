@@ -58,7 +58,7 @@ namespace AutiAssist_MobileApp.Services
 
             try
             {
-                var response = await client.GetAsync($"Frequent");
+                var response = await client.GetAsync($"Frequent/");
                 var getFAResponse = await response.Content.ReadAsStringAsync();
                 var defaultResponseObject = JsonConvert.DeserializeObject<FrequentActivityResponse>(getFAResponse);
 
