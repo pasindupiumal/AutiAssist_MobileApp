@@ -9,8 +9,213 @@
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <Label HorizontalOptions="Center" Text="Home" />
+        <StackLayout Orientation="Vertical">
+            <ActivityIndicator
+                HorizontalOptions="FillAndExpand"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="CenterAndExpand" />
+            <ScrollView IsVisible="{Binding IsNotBusy}">
+                <Grid
+                    Padding="5,30,5,35"
+                    BackgroundColor="Transparent"
+                    ColumnSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="Transparent"
+                        HeightRequest="200"
+                        HorizontalOptions="Center"
+                        Source="def_user.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="200" />
+                    <StackLayout
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Margin="0,5,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal"
+                        VerticalOptions="Start">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="Most Frequent"
+                            TextColor="Black" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="Activities"
+                            TextColor="Black" />
+                    </StackLayout>
+                    <Frame
+                        Grid.Row="4"
+                        Grid.RowSpan="4"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BackgroundColor="Transparent"
+                        BorderColor="Blue"
+                        CornerRadius="20"
+                        HasShadow="True"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <StackLayout
+                            HorizontalOptions="CenterAndExpand"
+                            Orientation="Vertical"
+                            VerticalOptions="CenterAndExpand">
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="Age Category One"
+                                    TextColor="Black" />
+                            </StackLayout>
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="Game 01"
+                                    TextColor="Blue" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="Last Updated On"
+                                    TextColor="Black" />
+
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="22 October 2020"
+                                    TextColor="Black" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="8"
+                        Grid.RowSpan="4"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BackgroundColor="Transparent"
+                        BorderColor="Blue"
+                        CornerRadius="20"
+                        HasShadow="True"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <StackLayout
+                            HorizontalOptions="CenterAndExpand"
+                            Orientation="Vertical"
+                            VerticalOptions="CenterAndExpand">
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="SLMC Registration Number"
+                                    TextColor="Black" />
+                            </StackLayout>
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding Doctor.DoctorData.SlmcRegNo}"
+                                    TextColor="Blue" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="Last Updated On"
+                                    TextColor="Black" />
+
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="22 October 2020"
+                                    TextColor="Black" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="12"
+                        Grid.RowSpan="4"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BackgroundColor="Transparent"
+                        BorderColor="Blue"
+                        CornerRadius="20"
+                        HasShadow="True"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <StackLayout
+                            HorizontalOptions="CenterAndExpand"
+                            Orientation="Vertical"
+                            VerticalOptions="CenterAndExpand">
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="SLMC Registration Number"
+                                    TextColor="Black" />
+                            </StackLayout>
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding Doctor.DoctorData.SlmcRegNo}"
+                                    TextColor="Blue" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="Last Updated On"
+                                    TextColor="Black" />
+
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="22 October 2020"
+                                    TextColor="Black" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
